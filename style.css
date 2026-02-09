@@ -55,3 +55,35 @@ body {
     background-color: rgb(160, 130, 80);
 }
 
+#inscription 
+body{
+	margin: 0;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #gold; /* fond neutre */
+}
+
+fieldset{
+	border: 2px solid #d4af37; /* doré */
+	border-radius: 12px;
+	padding: 30px;
+	width: 400px; /* largeur fixe, propre */
+	background-color: white;
+	box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+
+legend{
+	margin: 0 auto;
+	border: 2px solid #d4af37;
+	border-radius: 20px;
+	background-color: #d4af37;
+	padding: 8px 20px;
+	font-weight: bold;
+	color: white;
+	text-align: center;
+}
+
+
