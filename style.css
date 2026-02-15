@@ -3,7 +3,6 @@ body {
     padding-top: 200px
 }
 
-/* Header */
 #front {
     display: flex;  /*centrer le titre*/
     align-items: center;
@@ -66,13 +65,13 @@ section {
 
 #gauche .legende h2 {
     margin: 10px 0;
-    font-size: 75px; /* texte plus grand */
+    font-size: 75px; 
     color: rgb(191, 167, 106);
 }
 
 #gauche .legende p {
     margin: 0;
-    font-size: 50px; /* texte plus grand */
+    font-size: 50px; 
     color: rgb(0, 0, 0);
 }
 
