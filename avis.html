@@ -2,10 +2,11 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8" />
-        <title>Notation de votre commande</title>
-        <link rel="stylesheet" href="exo6.css">
+        <title>Avis de votre commande</title>
+        <link rel="stylesheet" href="style.css">
     </head>
-    <body>
+    <body class="fond-image">
+    <div class="page-centree">
         <div id="conteneur">
             <form name="notation" method="post" action="#">
                 <fieldset>
@@ -22,7 +23,7 @@
                             <option value="excellent">Excellent</option>
                             <option value="bon">Bon</option>
                             <option value="moyen">Moyen</option>
-                            <option value="decevant">Décevant</option>
+                            <option value="horrible">Horrible</option>
                         </select>
                     </div><br />
 
@@ -33,11 +34,12 @@
 
                     <div class="div1"></div>
                     <div class="div2">
-                        <input type="submit" name="envoyer_avis" value="Envoyer mon avis" class="champ" />
+                        <input type="submit" name="envoyer_avis" value="Envoyer mon avis" class="boutton" />
                     </div><br />
 
                 </fieldset>
             </form>
+        </div>
         </div>
     </body>
 </html>
