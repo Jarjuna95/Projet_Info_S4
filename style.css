@@ -1,6 +1,7 @@
-body {
+#accueil {
     margin: 0;
-    padding-top: 200px
+    padding-top: 200px;
+    background-color: rgb(250, 245, 235); 
 }
 
 #front {
@@ -9,7 +10,7 @@ body {
     justify-content: center;
     width: 100%;
     height: 200px;
-    background: linear-gradient(to bottom, rgba(184, 148, 58, 0.8), rgba(192, 173, 125, 0.8));
+    background: linear-gradient(to bottom, rgb(184, 148, 58), rgb(192, 173, 125));
     color: white;
     position: fixed;
     top: 0;
@@ -25,7 +26,7 @@ body {
     color: rgb(191, 167, 106);
 }
 
-section {
+#presentation {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -75,15 +76,62 @@ section {
     color: rgb(0, 0, 0);
 }
 
-
-/*.search {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 30px;
+.menu {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 50px 20px;
+    font-family: 'Playfair Display', serif;
+    background-color: rgb(248, 245, 235);
 }
 
-.search input {
-  width: 300px;
-  padding: 10px;
-  font-size: 16px;
-}*/
+.menutype {
+    margin-bottom: 60px;
+}
+
+.titre {
+    font-size: 36px;
+    font-weight: 700;
+    border-bottom: 2px solid #d4af37;
+    padding-bottom: 12px;
+    margin-bottom: 30px;
+    color: #4b3b2f;
+}
+
+.menuitem {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 22px 0;
+    border-bottom: 1px solid #e0d9d2;
+}
+
+.menutexte {
+    max-width: 70%;
+}
+
+.menutexte h3 {
+    font-size: 24px;
+    margin: 0 0 6px 0;
+    font-weight: 700;
+    color: black;
+}
+
+.menutexte p {
+    font-size: 18px;
+    margin: 0;
+    font-style: italic;
+    color: rgb(127, 103, 6);
+    line-height: 1.4;
+}
+
+.prix {
+    font-size: 20px;
+    font-weight: 700;
+    color: #d4af37;
+    min-width: 60px;
+    text-align: right;
+}
+
+.menuitem:hover {
+    background-color: rgba(212, 175, 55, 0.05);
+}
