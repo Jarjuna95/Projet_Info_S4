@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Notation de votre commande</title>
+        <link rel="stylesheet" href="exo6.css">
+    </head>
+    <body>
+        <div id="conteneur">
+            <form name="notation" method="post" action="#">
+                <fieldset>
+                    <legend>Donnez nous votre avis</legend>
+
+                    <div class="div1">Note de la livraison (1 à 5)</div>
+                    <div class="div2">
+                        <input type="number" name="note_livraison" min="1" max="5" value="5" class="champ" />
+                    </div><br />
+
+                    <div class="div1">Qualité des produits</div>
+                    <div class="div2">
+                        <select name="note_produit" class="champ">
+                            <option value="excellent">Excellent</option>
+                            <option value="bon">Bon</option>
+                            <option value="moyen">Moyen</option>
+                            <option value="decevant">Décevant</option>
+                        </select>
+                    </div><br />
+
+                    <div class="div1">Commentaire</div>
+                    <div class="div2">
+                        <textarea name="commentaire" class="champ" rows="3" placeholder="Dites-nous en plus..."></textarea>
+                    </div><br />
+
+                    <div class="div1"></div>
+                    <div class="div2">
+                        <input type="submit" name="envoyer_avis" value="Envoyer mon avis" class="champ" />
+                    </div><br />
+
+                </fieldset>
+            </form>
+        </div>
+    </body>
+</html>
