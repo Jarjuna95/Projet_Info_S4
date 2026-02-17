@@ -136,6 +136,66 @@
     background-color: rgba(212, 175, 55, 0.05);
 }
 
+/*presentation*/
+
+.filtres {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 50px;
+}
+
+.filtres button {
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 2px solid rgb(191, 167, 106);
+    background-color:  rgb(250, 245, 235);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.filtres button:hover{
+    background-color: rgb(212, 192, 127);
+}
+
+.grille-produits {
+    display: grid;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.carte-produit {
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+.carte-produit:hover {
+    background-color: rgb(194, 177, 134);
+}
+
+.carte-produit img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover; /* demande a chatgpt car les image etait etiré */
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+.carte-produit h3 {
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+.carte-produit p {
+    font-size: 16px;
+    color: rgb(127, 103, 6);
+    font-style: italic;
+}
+
 /*formulaire*/
 
 .page-centree {
