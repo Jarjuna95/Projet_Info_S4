@@ -196,6 +196,30 @@
     font-style: italic;
 }
 
+/* admin */
+
+.tableau {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tableau th {
+    text-align: left;
+    padding: 15px;
+    border-bottom: 2px solid rgb(212, 175, 55);
+    color: rgb(191, 167, 106);
+    font-size: 18px;
+}
+
+.tableau td {
+    padding: 15px;
+    border-bottom: 2px solid rgb(214, 196, 138);
+}
+
+.tableau tr:hover {
+    background-color: rgba(212, 175, 55, 0.05);
+}
+
 /*formulaire*/
 
 .page-centree {
