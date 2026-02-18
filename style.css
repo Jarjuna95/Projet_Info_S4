@@ -220,6 +220,55 @@
     background-color: rgba(212, 175, 55, 0.05);
 }
 
+/* profil */
+
+.profilbox {
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 50px ;
+}
+
+.profilbox section {
+    margin-bottom: 40px; 
+}
+
+#crayon {
+    padding: 8px 12px;   
+    margin: 0;          
+    font-size: 22px;
+    border-radius: 15px;
+    border: 2px solid rgb(191, 167, 106);
+    background-color: rgb(253, 250, 242);
+}
+
+#crayon:hover{
+    background-color: rgb(236, 223, 187);
+}
+
+.premierelp {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ligneprofil {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+    font-size: 18px;
+    gap: 10px;
+}
+
+.ligneprofil p{
+    font-weight: bold;
+    width: 150px;
+}
+
+.ligneprofil span{
+   color: rgb(127, 103, 6); 
+}
+
 /*formulaire*/
 
 .page-centree {
