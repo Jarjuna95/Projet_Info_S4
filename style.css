@@ -425,15 +425,14 @@ legend {
     padding: 10px 0;
     border-bottom: 1px solid #f0f0f0;
     font-size: 16px;
-
-    .label {
+}
+.label {
         font-weight: bold;
         color: #4b3b2f;
-    }
+}
     
-    .donnee {
+.donnee {
         color: #666;
-    }
 }
 
 #cadre-gris-adresse, 
