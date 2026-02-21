@@ -18,6 +18,24 @@
     z-index: 1000; /* pour être au-dessus du reste du contenu */
 }
 
+#diffpages {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+#diffpages a {
+    color: rgb(191, 167, 106);
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#diffpages a:hover {
+    color: black;
+}
+
 .ptitre {
     display: flex;  /*centrer le titre*/
     align-items: center;
