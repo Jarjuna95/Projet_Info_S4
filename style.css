@@ -336,18 +336,19 @@ legend {
     transition: 0.3s;                    /* Animation douce pour le focus */
 }
 
-
-/*.search {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 30px;
+.creer-compte {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 20px;
+    color: rgb(191, 167, 106);
+    font-weight: bold;
+    text-decoration: none;
 }
 
-.search input {
-  width: 300px;
-  padding: 10px;
-  font-size: 16px;
-}*/
+.creer-compte:hover {
+    color: black;
+}
 
 
 .ligne-info {
