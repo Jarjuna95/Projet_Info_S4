@@ -279,20 +279,13 @@
 }
 
 fieldset {
-    /* Élargir le cadre */
-    width: 100%;             /* Prend toute la largeur disponible */
-    max-width: 550px;        /* Limite la largeur pour que ça reste élégant (comme l'image) */
-    
-    /* Espacement interne (Padding) */
-    padding: 60px 50px;      /* Augmente l'espace autour des champs pour "aérer" */
-    
-    /* Design */
+    width: 100%;          
+    max-width: 550px;      
+    padding: 60px 50px;      
     background-color: white;
-    border-radius: 50px;     /* Bords encore plus arrondis pour coller à ton exemple */
+    border-radius: 50px; 
     border: 3px solid rgb(191, 167, 106); 
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15); /* Ombre plus douce et large */
-    
-    /* Centrage */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15); 
     margin: 40px auto; 
 }
 
@@ -315,10 +308,9 @@ legend {
     background-repeat: no-repeat;
 }
 
-/* Classe universelle pour tous tes boutons de validation */
 .boutton {
-    background-color: rgb(191, 167, 106); /* Force le rouge */
-    color: black ;          /* Force le noir */
+    background-color: rgb(191, 167, 106);
+    color: black ;    
     font-weight: bold;
     font-size: 18px;
     padding: 15px 30px;
@@ -331,21 +323,16 @@ legend {
     transition: 0.3s;
 }
 
-/* Cette classe s'applique à tous tes inputs car ils ont class="champ" */
 .champ {
-    width: 100%;             /* Prend toute la largeur du fieldset */
-    padding: 12px 20px;      /* Espace à l'intérieur pour que le texte ne colle pas aux bords */
-    margin: 8px 0;           /* Espace entre chaque cadre */
+    width: 100%;             
+    padding: 12px 20px;     
+    margin: 8px 0;           
     display: inline-block;
-    
-    /* L'ARRONDI ET LE BORD */
-    border: 2px solid rgb(191, 167, 106); /* On garde ton doré pour la cohérence */
-    border-radius: 25px;                 /* C'est cette ligne qui arrondit les cadres */
-    
-    /* DESIGN MODERNE */
-    background-color: #f9f9f9;           /* Un fond très légèrement gris pour faire ressortir le blanc du fieldset */
+    border: 2px solid rgb(191, 167, 106); 
+    border-radius: 25px;                
+    background-color: #f9f9f9;     
     box-sizing: border-box;              /* Empêche le cadre de dépasser du fieldset */
-    outline: none;                       /* Enlève le contour bleu moche quand on clique dedans */
+    outline: none;                       /* Enlève le contour bleu quand on clique dedans */
     transition: 0.3s;                    /* Animation douce pour le focus */
 }
 
@@ -382,31 +369,23 @@ legend {
 
 #cadre-gris-adresse, 
 #cadre-gris-instructions {
-    /* Fond gris très clair  */
     background-color: #f2f2f2; 
-    
-    /* Bordure grise discrète*/
     border: 1px solid #dcdcdc; 
-    
-    /* Arrondis identiques*/
+    /* Arrondis */
     border-radius: 25px; 
-    
     padding: 25px;
     margin: 20px 0;
-    
-    /* Ombre très légère pour l'effet "carte" */
+    /* Ombre */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    
-    /* Alignement et texte */
     text-align: left;
     color: #333;
-    font-family: 'Playfair Display', serif; /* On garde ton style menu */
-
+    font-family: 'Playfair Display', serif; 
+    
     .titre-cadre {
         display: block;
         font-weight: bold;
         font-size: 16px;
-        color: #555; /* Gris foncé pour le titre */
+        color: #555; 
         text-transform: uppercase;
         margin-bottom: 10px;
         padding-bottom: 8px;
@@ -444,4 +423,37 @@ legend {
     border-radius: 5px;  
     cursor: pointer;
     transition: 0.3s ease;
+}
+
+.cadre-tableau-admin {
+    background-color: white;
+    width: 100%;
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 30px;
+    border: 4px solid rgb(191, 167, 106); 
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15); 
+    border-radius: 50px; 
+    overflow: hidden;
+}
+
+.cadre-tableau-admin table {
+    width: 100%;
+    border-collapse: collapse; /* Voir les lignes entre les cases */
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+/* Les lignes et les colonnes (le quadrillage) */
+.cadre-tableau-admin td {
+    border: 1px solid rgb(214, 196, 138);
+    padding: 15px;
+    text-align: left;
+}
+
+/* Les boutons bien arrondis */
+.cadre-tableau-admin .button {
+    border-radius: 50px;    
+    padding: 10px 20px;
+    margin: 5px;
 }
