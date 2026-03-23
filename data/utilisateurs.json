@@ -1,0 +1,152 @@
+[
+    {
+        "id": 1,
+        "login": "eren.yaeger@gmail.com",
+        "mot_de_passe": "titan123",
+        "role": "client",
+        "nom": "Yaeger",
+        "prenom": "Eren",
+        "adresse": "12 rue des ZZZ, 95000 Cergy",
+        "telephone": "0612345678",
+        "date_inscription": "2025-09-01",
+        "statut": "actif",
+        "points_fidelite": 150
+    },
+    {
+    "id": 2,
+        "login": "messi10@gmail.com",
+        "mot_de_passe": "12345678910",
+        "role": "client",
+        "nom": "Messi",
+        "prenom": "Lionel",
+        "adresse": "5 rue du Ballon, 75000 Paris",
+        "telephone": "0698765432",
+        "date_inscription": "2025-07-01",
+        "statut": "actif",
+        "points_fidelite": 300
+    },
+    {
+        "id": 3,
+        "login": "ktanjiro@gmail.com",
+        "mot_de_passe": "demon456",
+        "role": "client",
+        "nom": "Kamado",
+        "prenom": "Tanjiro",
+        "adresse": "7 rue du Soleil, 69000 Lyon",
+        "telephone": "0634567890",
+        "date_inscription": "2026-02-01",
+        "statut": "actif",
+        "points_fidelite": 80
+    },
+    {
+        "id": 4,
+        "login": "gideon@gmail.com",
+        "mot_de_passe": "necromancer789",
+        "role": "client",
+        "nom": "Ofnir",
+        "prenom": "Gideon",
+        "adresse": "3 impasse des Ossements, 13000 Marseille",
+        "telephone": "0645678901",
+        "date_inscription": "2025-12-10",
+        "statut": "actif",
+        "points_fidelite": 210
+    },
+    {
+        "id": 5,
+        "login": "pikachu@gmail.com",
+        "mot_de_passe": "pika25",
+        "role": "client",
+        "nom": "Pikachu",
+        "prenom": "Hihih",
+        "adresse": "25 rue des Pokémons, 33000 Bordeaux",
+        "telephone": "0656789012",
+        "date_inscription": "2026-01-05",
+        "statut": "actif",
+        "points_fidelite": 50
+    },
+    {
+        "id": 6,
+        "login": "admin@laconfrerie.fr",
+        "mot_de_passe": "adminSecure1",
+        "role": "admin",
+        "nom": "Yagami",
+        "prenom": "Light",
+        "adresse": "CYTech, 95000 Cergy",
+        "telephone": "0799999999",
+        "date_inscription": "2025-09-01",
+        "statut": "actif",
+        "points_fidelite": 0
+    },
+    {
+        "id": 7,
+        "login": "admin2@laconfrerie.fr",
+        "mot_de_passe": "adminSecure2",
+        "role": "admin",
+        "nom": "Joestar",
+        "prenom": "Johnny",
+        "adresse": "CYTech, 95000 Cergy",
+        "telephone": "0788888888",
+        "date_inscription": "2025-09-01",
+        "statut": "actif",
+        "points_fidelite": 0
+    },
+    {
+        "id": 8,
+        "login": "chef@laconfrerie.fr",
+        "mot_de_passe": "cuisine99",
+        "role": "restaurateur",
+        "nom": "Ashina",
+        "prenom": "Isshin",
+        "adresse": "CYTech, 95000 Cergy",
+        "telephone": "0777777777",
+        "date_inscription": "2025-09-01",
+        "statut": "actif",
+        "points_fidelite": 0
+    },
+    {
+        "id": 9,
+        "login": "livreur@laconfrerie.fr",
+        "mot_de_passe": "livraison42",
+        "role": "livreur",
+        "nom": "Martin",
+        "prenom": "Ledépaneur",
+        "adresse": "15 rue de la Livraison, 95000 Cergy",
+        "telephone": "0766666666",
+        "date_inscription": "2025-09-01",
+        "statut": "actif",
+        "points_fidelite": 0
+    }
+]
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
