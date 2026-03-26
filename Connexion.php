@@ -27,7 +27,8 @@ if (isset($_POST['se_connecter'])) {
             header('Location: ./profil.php');
             exit();
         } else {
-            echo "Email ou mot de passe incorrect !";
+            header('Location: ./Connexion.php'); 
+            exit();
         }
     }
 }
