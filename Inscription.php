@@ -1,3 +1,58 @@
+<?php
+require_once('./constantes.inc.php');
+
+// On vérifie si le bouton du formulaire a été cliqué
+if (isset($_POST['sinscrire'])) {
+    
+    $nom = $_POST['nom'];
+    $prenom = $_POST['prenom'];
+    $email = $_POST['email'];
+    $mdp = $_POST['mdp'];
+
+    $data = [];
+
+    // Lecture du fichier (si il existe)
+    if (file_exists(CHEMIN_JSON)) {
+        $file = fopen(CHEMIN_JSON, 'r');
+        $size = filesize(CHEMIN_JSON);
+        // Si le fichier n'est pas vide on lit, sinon tableau vide
+        $json = ($size > 0) ? fread($file, $size) : "[]";
+        fclose($file);
+        $data = json_decode($json, True);
+    }
+
+    // Vérification si l'utilisateur existe déjà avec une boucle FOR
+    $trouve = false;
+    for ($i = 0; $i < count($data); $i++) {
+        if ($data[$i]['login'] == $email) {
+            $trouve = true;
+            break;
+        }
+    }
+
+    if ($trouve == true) {
+        echo "Erreur : cet utilisateur existe déjà !";
+    } else {
+        // On ajoute le nouvel utilisateur au tableau
+        $data[] = [
+            "nom" => $nom,
+            "prenom" => $prenom,
+            "login" => $email,
+            "password" => $mdp
+        ];
+
+        // Écriture dans le fichier
+        $file = fopen(CHEMIN_JSON, 'w');
+        fwrite($file, json_encode($data, JSON_PRETTY_PRINT));
+        fclose($file);
+
+        header('Location: ./Connexion.php');
+        exit();
+    }
+}
+?>
+
+
 <!DOCTYPE html>
 <html>
     <head>
