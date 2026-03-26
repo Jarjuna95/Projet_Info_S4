@@ -1,3 +1,38 @@
+<?php
+require_once('./constantes.inc.php');
+session_start();
+
+if (isset($_POST['se_connecter'])) {
+    $email = $_POST['email'];
+    $mdp = $_POST['mdp'];
+
+    if (file_exists(CHEMIN_JSON)) {
+        $file = fopen(CHEMIN_JSON, 'r');
+        $json = fread($file, 1000000); // On lit une grande taille comme dans ton cours
+        fclose($file);
+        $data = json_decode($json, True);
+
+        // Boucle FOR pour chercher l'utilisateur
+        $identifiants_ok = false;
+        for ($i = 0; $i < count($data); $i++) {
+            if ($data[$i]['login'] == $email && $data[$i]['password'] == $mdp) {
+                $identifiants_ok = true;
+                // On stocke le nom de l'utilisateur en session
+                $_SESSION[SESSION_LOGIN] = $data[$i]['nom'];
+                break;
+            }
+        }
+
+        if ($identifiants_ok == true) {
+            header('Location: ./home.php');
+            exit();
+        } else {
+            echo "Email ou mot de passe incorrect !";
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
