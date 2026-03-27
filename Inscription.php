@@ -1,53 +1,59 @@
 <?php
 require_once('./constantes.inc.php');
+require_once('./fonctionphp/fonctions.inc.php');
 
-// On vérifie si le bouton du formulaire a été cliqué
+session_start();
+redirecterSiConnecte('./profil.php');
+$erreur = "";
+
 if (isset($_POST['sinscrire'])) {
-    
-    $nom = $_POST['nom'];
-    $prenom = $_POST['prenom'];
-    $email = $_POST['email'];
-    $mdp = $_POST['mdp'];
 
-    $data = [];
+    $nom     = $_POST['nom'];
+    $prenom  = $_POST['prenom'];
+    $email   = $_POST['email'];
+    $adresse = $_POST['adresse'];
+    $tel     = $_POST['telephone'];
+    $mdp     = $_POST['mdp'];
 
-    // Lecture du fichier (si il existe)
-    if (file_exists(CHEMIN_JSON)) {
-        $file = fopen(CHEMIN_JSON, 'r');
-        $size = filesize(CHEMIN_JSON);
-        // Si le fichier n'est pas vide on lit, sinon tableau vide
-        $json = ($size > 0) ? fread($file, $size) : "[]";
-        fclose($file);
-        $data = json_decode($json, True);
-    }
+    if ($nom == "" || $prenom == "" || $email == "" || $mdp == "") { //verif des champs obligatoire
+        $erreur = "Veuillez remplir tous les champs obligatoires.";
 
-    // Vérification si l'utilisateur existe déjà avec une boucle FOR
-    $trouve = false;
-    for ($i = 0; $i < count($data); $i++) {
-        if ($data[$i]['login'] == $email) {
-            $trouve = true;
-            break;
-        }
-    }
-
-    if ($trouve == true) {
-        echo "Erreur : cet utilisateur existe déjà !";
     } else {
-        // On ajoute le nouvel utilisateur au tableau
-        $data[] = [
-            "nom" => $nom,
-            "prenom" => $prenom,
-            "login" => $email,
-            "password" => $mdp
-        ];
 
-        // Écriture dans le fichier
-        $file = fopen(CHEMIN_JSON, 'w');
-        fwrite($file, json_encode($data, JSON_PRETTY_PRINT));
-        fclose($file);
+        $data = lireUtilisateurs();
+        if ($data === false) {
+            $data = [];
+        }
 
-        header('Location: ./Connexion.php');
-        exit();
+        $existeDeja = chercherUtilisateur($data, $email);
+
+        if ($existeDeja !== false) {
+            $erreur = "Un compte existe déjà avec cet email.";
+
+        } else {
+            $nouvelUtilisateur = [];
+            $nouvelUtilisateur['id']               = count($data) + 1;
+            $nouvelUtilisateur['login']            = $email;
+            $nouvelUtilisateur['password']         = $mdp;
+            $nouvelUtilisateur['role']             = "client";
+            $nouvelUtilisateur['nom']              = $nom;
+            $nouvelUtilisateur['prenom']           = $prenom;
+            $nouvelUtilisateur['adresse']          = $adresse;
+            $nouvelUtilisateur['telephone']        = $tel;
+            $nouvelUtilisateur['date_inscription'] = date('Y-m-d');
+            $nouvelUtilisateur['statut']           = "actif";
+            $nouvelUtilisateur['points_fidelite']  = 0;
+
+            $data[] = $nouvelUtilisateur;
+
+            $ok = ecrireUtilisateurs($data);
+            if ($ok) {
+                header('Location: ./Connexion.php');
+                exit(0);
+            } else {
+                $erreur = "Erreur interne : impossible d'enregistrer l'utilisateur.";
+            }
+        }
     }
 }
 ?>
