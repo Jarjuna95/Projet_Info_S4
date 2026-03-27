@@ -1,34 +1,39 @@
 <?php
 require_once('./constantes.inc.php');
+require_once('./fonctionphp/fonction.inc.php');
+
 session_start();
 
+redirecterSiConnecte('./profil.php'); // Si l utilisateur est deja connecte on le redirige vers son profil
+
+$erreur = "";
+
 if (isset($_POST['se_connecter'])) {
+    if (!isset($_POST['email']) || !isset($_POST['mdp'])) {
+        header('Location: ./Connexion.php');
+        exit(0);
+    }
+
     $email = $_POST['email'];
-    $mdp = $_POST['mdp'];
+    $mdp   = $_POST['mdp'];
 
-    if (file_exists(CHEMIN_JSON)) {
-        $file = fopen(CHEMIN_JSON, 'r');
-        $json = fread($file, 1000000); // On lit une grande taille comme dans ton cours
-        fclose($file);
-        $data = json_decode($json, True);
+    $data = lireUtilisateurs();
 
-        // Boucle FOR pour chercher l'utilisateur
-        $identifiants_ok = false;
-        for ($i = 0; $i < count($data); $i++) {
-            if ($data[$i]['login'] == $email && $data[$i]['password'] == $mdp) {
-                $identifiants_ok = true;
-                // On stocke le nom de l'utilisateur en session
-                $_SESSION[SESSION_LOGIN] = $data[$i]['nom'];
-                break;
-            }
-        }
+    if ($data === false) {
+        $erreur = "Erreur interne : impossible de lire les données.";
+    } else {
+        // Vérification des identifiants
+        $utilisateur = verifierIdentifiants($data, $email, $mdp);
 
-        if ($identifiants_ok == true) {
+        if ($utilisateur !== false) {
+            $_SESSION[SESSION_LOGIN] = $utilisateur['login'];
+            $_SESSION['role']        = $utilisateur['role'];
+            $_SESSION['nom']         = $utilisateur['nom'];
+            $_SESSION['prenom']      = $utilisateur['prenom'];
             header('Location: ./profil.php');
-            exit();
+            exit(0);
         } else {
-            header('Location: ./Connexion.php'); 
-            exit();
+            $erreur = "Email ou mot de passe incorrect.";
         }
     }
 }
