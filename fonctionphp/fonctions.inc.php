@@ -40,7 +40,7 @@ function ecrireUtilisateurs($data) {
     if ($file == false) {
         return false;
     }
-    fwrite($file, json_encode($data, JSON_PRETTY_PRINT));
+    fwrite($file, json_encode($data));
     fclose($file);
     return true;
 }
