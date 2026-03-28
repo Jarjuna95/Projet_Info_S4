@@ -49,7 +49,7 @@
         "code_interphone": "",
         "etage": "1er étage",
         "commentaire": "Laisser devant la porte",
-        "statut": "en_attente",
+        "statut": "a_preparer",
         "date_commande": "2026-03-28 13:00:00",
         "heure_livraison_souhaitee": "2026-03-28 14:30:00",
         "prix_total": 44.00,
