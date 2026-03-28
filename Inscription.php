@@ -101,7 +101,7 @@ if (isset($_POST['sinscrire'])) {
         
         <div class="div1">Mot de passe</div>
         <div class="div2">
-            <input type="Mot de passe" name="mdp" class="champ" />
+            <input type="password" name="mdp" class="champ" />
         </div><br />
 
         <div class="div1"></div>
