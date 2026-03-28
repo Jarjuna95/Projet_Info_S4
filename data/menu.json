@@ -1,30 +1,30 @@
 [
     {
         "id": 1,
-        "nom": "Menu Ramen Découverte",
-        "description": "L'essentiel du ramen japonais pour les nouveaux venus",
-        "prix_total": 18.00,
-        "plats_ids": [1, 4, 10],
+        "nom": "Menu Dolce Vita",
+        "description": "L'essentiel de la cuisine italienne : une entrée raffinée, un plat signature et un dessert maison",
+        "prix_total": 72.00,
+        "plats_ids": [1, 7, 12],
         "nb_personnes_min": 1,
         "creneaux": ["midi", "soir"],
         "disponible": true
     },
     {
         "id": 2,
-        "nom": "Menu Izakaya Complet",
-        "description": "L'expérience izakaya : entrées, plat et boisson",
-        "prix_total": 22.00,
-        "plats_ids": [2, 3, 9, 14],
+        "nom": "Menu Mare e Terra",
+        "description": "Le meilleur de la mer et de la terre : carpaccio, homard et tiramisu royal",
+        "prix_total": 110.00,
+        "plats_ids": [2, 5, 12],
         "nb_personnes_min": 1,
         "creneaux": ["soir"],
         "disponible": true
     },
     {
         "id": 3,
-        "nom": "Menu Végétarien Zen",
-        "description": "Un repas complet sans viande ni poisson",
-        "prix_total": 17.50,
-        "plats_ids": [3, 6, 12, 13],
+        "nom": "Menu Tradizione",
+        "description": "Un repas ancré dans la tradition italienne, des antipasti au dessert",
+        "prix_total": 68.00,
+        "plats_ids": [4, 9, 13],
         "nb_personnes_min": 1,
         "creneaux": ["midi", "soir"],
         "disponible": true
