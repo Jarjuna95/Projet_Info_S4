@@ -1,6 +1,6 @@
 <?php
 define('CHEMIN_UTILISATEURS', './data/utilisateurs.json');
-define('CHEMIN_COMMANDES',    './data/commandes.json');
+define('CHEMIN_COMMANDES',    './data/commande.json');
 define('CHEMIN_PLATS',        './data/plats.json');
 define('CHEMIN_MENUS',        './data/menu.json');
 
