@@ -56,7 +56,7 @@ function chercherUtilisateur($data, $login) {
 
 function verifierIdentifiants($data, $login, $mdp) {
     for ($i = 0; $i < count($data); $i++) {
-        if ($data[$i]['login'] == $login && $data[$i]['password'] == $mdp) {
+        if ($data[$i]['login'] == $login && $data[$i]['mot_de_passe'] == $mdp) {
             return $data[$i];
         }
     }
