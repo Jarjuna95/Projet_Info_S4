@@ -1,6 +1,6 @@
 <?php
 require_once('./constantes.inc.php');
-require_once('./fonctionphp/fonction.inc.php');
+require_once('./fonctionphp/fonctions.inc.php');
 
 session_start();
 
@@ -72,7 +72,7 @@ if (isset($_POST['se_connecter'])) {
 
                 </fieldset>
             </form>
-            <a href="Inscription.html" class="creer-compte">Créer un compte</a>
+            <a href="Inscription.php" class="creer-compte">Créer un compte</a>
         </div>
 
     </div>
