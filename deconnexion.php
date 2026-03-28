@@ -1,5 +1,5 @@
 <?php
-require_once('./constantes.inc.php');
+require_once('./fonctionphp/constantes.inc.php');
 
 session_start();
 
