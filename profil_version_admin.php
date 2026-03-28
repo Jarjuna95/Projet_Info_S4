@@ -77,7 +77,7 @@ if (empty($mesCommandes)) {
     <div class="profilbox">
         <section>
             <div class="premierelp">
-                <h2 class="titre">Information de <?php echo $utilisateur['prenom'];</h2>
+                <h2 class="titre">Information de <?php echo $utilisateur['prenom']?>;</h2>
             </div>
             <div class="ligneprofil"><p>Nom :</p><span><?php echo $utilisateur['nom']; ?></span></div>
             <div class="ligneprofil"><p>Prénom :</p><span><?php echo $utilisateur['prenom']; ?></span></div>
