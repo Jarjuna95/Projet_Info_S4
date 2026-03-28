@@ -61,6 +61,7 @@ function verifierIdentifiants($data, $login, $mdp) {
         }
     }
     return false;
+}
 // fin connexion et inscrition
 
 
