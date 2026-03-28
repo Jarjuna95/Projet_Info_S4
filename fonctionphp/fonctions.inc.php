@@ -61,5 +61,58 @@ function verifierIdentifiants($data, $login, $mdp) {
         }
     }
     return false;
-}
 // fin connexion et inscrition
+
+
+    //commande 
+    function lireCommandes() {
+    return lireJSON(CHEMIN_COMMANDES);
+}
+
+function ecrireCommandes($data) {
+    return ecrireJSON(CHEMIN_COMMANDES, $data);
+}
+
+function commandesDuLivreur($commandes, $livreurId) {
+    $res = [];
+    foreach ($commandes as $c) {
+        if ($c['livreur_id'] == $livreurId) $res[] = $c;
+    }
+    return $res;
+}
+
+function chercherCommandeParId($commandes, $id) {
+    foreach ($commandes as $c) {
+        if ($c['id'] == $id) return $c;
+    }
+    return false;
+}
+
+function mettreAJourStatutCommande($commandeId, $nouveauStatut) {
+    $commandes = lireCommandes();
+    $ok = false;
+    for ($i = 0; $i < count($commandes); $i++) {
+        if ($commandes[$i]['id'] == $commandeId) {
+            $commandes[$i]['statut'] = $nouveauStatut;
+            $ok = true;
+            break;
+        }
+    }
+    if ($ok) ecrireCommandes($commandes);
+    return $ok;
+}
+
+
+function lirePlats() {
+    return lireJSON(CHEMIN_PLATS);
+}
+
+function chercherPlatParId($plats, $id) {
+    foreach ($plats as $p) {
+        if ($p['id'] == $id) return $p;
+    }
+    return false;
+}
+
+?>
+}
