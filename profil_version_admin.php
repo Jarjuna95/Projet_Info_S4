@@ -72,18 +72,22 @@ if (empty($mesCommandes)) {
     <link rel="stylesheet" href="style.css">
 </head>
 <body id="accueil2">
-    <h1 class="ptitre">────── Votre Profil ──────</h1>
-
+    <h1 class="ptitre">────── Profil utilisateur ──────</h1>
+ 
     <div class="profilbox">
         <section>
             <div class="premierelp">
-                <h2 class="titre">Informations personnelles</h2>
-                <button id="crayon">✏️</button>
+                <h2 class="titre">Information de <?php echo $utilisateur['prenom'];</h2>
             </div>
-            <div class="ligneprofil"><p>Nom :</p><span><?php echo htmlspecialchars($client['nom']); ?></span></div>
-            <div class="ligneprofil"><p>Prénom :</p><span><?php echo htmlspecialchars($client['prenom']); ?></span></div>
-            <div class="ligneprofil"><p>Email :</p><span><?php echo htmlspecialchars($client['login']); ?></span></div>
-            <div class="ligneprofil"><p>Points fidélité :</p><span><?php echo $client['points_fidelite']; ?> pts</span></div>
+            <div class="ligneprofil"><p>Nom :</p><span><?php echo $utilisateur['nom']; ?></span></div>
+            <div class="ligneprofil"><p>Prénom :</p><span><?php echo $utilisateur['prenom']; ?></span></div>
+            <div class="ligneprofil"><p>Email :</p><span><?php echo $utilisateur['login']; ?></span></div>
+            <div class="ligneprofil"><p>Rôle :</p><span><?php echo ucfirst($utilisateur['role']); ?></span></div>
+            <div class="ligneprofil"><p>Statut :</p><span><?php echo ucfirst($utilisateur['statut']); ?></span></div>
+            <div class="ligneprofil"><p>Téléphone :</p><span><?php echo $utilisateur['telephone']; ?></span></div>
+            <div class="ligneprofil"><p>Adresse :</p><span><?php echo $utilisateur['adresse']; ?></span></div>
+            <div class="ligneprofil"><p>Inscription :</p><span><?php echo $utilisateur['date_inscription']; ?></span></div>
+            <div class="ligneprofil"><p>Points fidélité :</p><span><?php echo $utilisateur['points_fidelite']; ?> pts</span></div>
         </section>
     </div>
 
@@ -94,8 +98,8 @@ if (empty($mesCommandes)) {
         </section>
     </div>
 
-    <div class="lien-deconnexion">
-        <a href="deconnexion.php">Se déconnecter</a>
+    <div>
+        <a href="admin.php" class="boutton">Retour à l'administration</a>
     </div>
 </body>
 </html>
