@@ -47,15 +47,21 @@ if (empty($mesCommandes)) {
             $boutonNote = '<p>⭐ Note livraison : ' . $cmd['note_livraison'] . '/5 — Produits : ' . $cmd['note_produit'] . '</p>';
         }
 
-        $lignesCommandes .= '
-        <div class="carte-produit">
-            <p><strong>Commande #' . $cmd['id'] . '</strong></p>
-            <p>' . implode(', ', $nomPlats) . '</p>
-            <p><strong>' . number_format($cmd['prix_total'], 2) . ' €</strong></p>
-            <p>Le ' . $cmd['date_commande'] . '</p>
-            <p style="color:' . $couleurStatut . '"><strong>' . strtoupper(str_replace('_', ' ', $cmd['statut'])) . '</strong></p>
-            ' . $boutonNote . '
-        </div>';
+        $idCmd      = $cmd['id'];
+        $listePlats = implode(', ', $nomPlats);
+        $prix       = number_format($cmd['prix_total'], 2);
+        $date       = $cmd['date_commande'];
+        $statut     = strtoupper(str_replace('_', ' ', $cmd['statut']));
+
+        $lignesCommandes .= "
+        <div class='carte-produit'>
+        <p><strong>Commande #$idCmd</strong></p>
+        <p>$listePlats</p>
+        <p><strong>$prix €</strong></p>
+        <p>Le $date</p>
+        <p style='color:$couleurStatut'><strong>$statut</strong></p>
+        $boutonNote
+        </div>";
     }
 }
 ?>
@@ -75,6 +81,7 @@ if (empty($mesCommandes)) {
                 <h2 class="titre">Informations personnelles</h2>
                 <button id="crayon">✏️</button>
             </div>
+            //htmlspecialchars sécurise l affichage contre les injections HTML
             <div class="ligneprofil"><p>Nom :</p><span><?php echo htmlspecialchars($client['nom']); ?></span></div>
             <div class="ligneprofil"><p>Prénom :</p><span><?php echo htmlspecialchars($client['prenom']); ?></span></div>
             <div class="ligneprofil"><p>Email :</p><span><?php echo htmlspecialchars($client['login']); ?></span></div>
