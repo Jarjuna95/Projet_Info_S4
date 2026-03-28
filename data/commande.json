@@ -1,0 +1,102 @@
+[
+    {
+        "id": "123456789",
+        "client_login": "eren.yaeger@gmail.com",
+        "client_nom": "Yaeger",
+        "client_prenom": "Eren",
+        "client_telephone": "0612345678",
+        "adresse_livraison": "12 rue des ZZZ, 95000 Cergy",
+        "commentaire": "Sonner deux fois",
+        "plats": [
+            {"nom": "Poulet rôti", "quantite": 2, "prix": 12.50},
+            {"nom": "Tarte tatin", "quantite": 1, "prix": 6.00}
+        ],
+        "menu": "Menu Confrérie",
+        "prix_total": 31.00,
+        "statut": "en_preparation",
+        "livreur_login": null,
+        "date_commande": "2026-03-27 18:30:00",
+        "heure_souhaitee": null,
+        "type": "livraison"
+    },
+    {
+        "id": "111111111",
+        "client_login": "pikachu@gmail.com",
+        "client_nom": "Pikachu",
+        "client_prenom": "Hihih",
+        "client_telephone": "0656789012",
+        "adresse_livraison": "25 rue des Pokémons, 33000 Bordeaux",
+        "commentaire": "",
+        "plats": [
+            {"nom": "Soupe à l'oignon", "quantite": 1, "prix": 7.50},
+            {"nom": "Côte de bœuf", "quantite": 1, "prix": 22.00}
+        ],
+        "menu": null,
+        "prix_total": 29.50,
+        "statut": "en_livraison",
+        "livreur_login": "livreur@laconfrerie.fr",
+        "date_commande": "2026-03-27 19:00:00",
+        "heure_souhaitee": null,
+        "type": "livraison"
+    },
+    {
+        "id": "222222222",
+        "client_login": "messi10@gmail.com",
+        "client_nom": "Messi",
+        "client_prenom": "Lionel",
+        "client_telephone": "0698765432",
+        "adresse_livraison": null,
+        "commentaire": "",
+        "plats": [
+            {"nom": "Tartare de saumon", "quantite": 2, "prix": 14.00}
+        ],
+        "menu": "Menu Dégustation",
+        "prix_total": 28.00,
+        "statut": "en_attente",
+        "livreur_login": null,
+        "date_commande": "2026-03-27 20:15:00",
+        "heure_souhaitee": "2026-03-28 12:00:00",
+        "type": "sur_place"
+    },
+    {
+        "id": "333333333",
+        "client_login": "ktanjiro@gmail.com",
+        "client_nom": "Kamado",
+        "client_prenom": "Tanjiro",
+        "client_telephone": "0634567890",
+        "adresse_livraison": "7 rue du Soleil, 69000 Lyon",
+        "commentaire": "Code interphone : 1234",
+        "plats": [
+            {"nom": "Foie gras", "quantite": 1, "prix": 18.00},
+            {"nom": "Magret de canard", "quantite": 1, "prix": 16.50},
+            {"nom": "Crème brûlée", "quantite": 2, "prix": 5.50}
+        ],
+        "menu": null,
+        "prix_total": 45.50,
+        "statut": "livree",
+        "livreur_login": "livreur@laconfrerie.fr",
+        "date_commande": "2026-03-27 12:00:00",
+        "heure_souhaitee": null,
+        "type": "livraison"
+    },
+    {
+        "id": "444444444",
+        "client_login": "gideon@gmail.com",
+        "client_nom": "Ofnir",
+        "client_prenom": "Gideon",
+        "client_telephone": "0645678901",
+        "adresse_livraison": "3 impasse des Ossements, 13000 Marseille",
+        "commentaire": "Laisser devant la porte",
+        "plats": [
+            {"nom": "Salade César", "quantite": 1, "prix": 9.00},
+            {"nom": "Poulet rôti", "quantite": 1, "prix": 12.50}
+        ],
+        "menu": "Menu Confrérie",
+        "prix_total": 33.50,
+        "statut": "en_preparation",
+        "livreur_login": null,
+        "date_commande": "2026-03-27 20:45:00",
+        "heure_souhaitee": null,
+        "type": "livraison"
+    }
+]
