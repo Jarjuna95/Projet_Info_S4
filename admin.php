@@ -37,7 +37,7 @@ $utilisateurs = lireUtilisateurs();
                     <td><?php echo $utilisateurs[$i]['date_inscription']; ?></td>
                     <td><?php echo ucfirst($utilisateurs[$i]['statut']); ?></td>
                     <td>
-                        <a href="" class="boutton"> //mettre lien
+                        <a href="profil_version_admin.php?id=<?php echo $u['id']; ?>" class="boutton"> //permettant ainsi d'accéder à la page admin par rapport au différent utilisateur
                             Voir le profil
                         </a>
                     </td>
