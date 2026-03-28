@@ -34,7 +34,7 @@ if (isset($_POST['sinscrire'])) {
             $nouvelUtilisateur = [];
             $nouvelUtilisateur['id']               = count($data) + 1;
             $nouvelUtilisateur['login']            = $email;
-            $nouvelUtilisateur['password']         = $mdp;
+            $nouvelUtilisateur['mot_de_passe']         = $mdp;
             $nouvelUtilisateur['role']             = "client";
             $nouvelUtilisateur['nom']              = $nom;
             $nouvelUtilisateur['prenom']           = $prenom;
