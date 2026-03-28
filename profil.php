@@ -33,8 +33,7 @@ if (empty($mesCommandes)) {
                 $nomPlats[] = $ligne['quantite'] . '× ' . $plat['nom'];
             }
         }
-
-        $couleurStatut = 'gray';
+        if ($cmd['statut'] === 'a_preparer')     $couleurStatut = 'gray';
         if ($cmd['statut'] === 'livree')         $couleurStatut = 'green';
         if ($cmd['statut'] === 'en_livraison')   $couleurStatut = 'orange';
         if ($cmd['statut'] === 'en_preparation') $couleurStatut = 'blue';
@@ -42,9 +41,9 @@ if (empty($mesCommandes)) {
 
         $boutonNote = "";
         if ($cmd['statut'] === 'livree' && empty($cmd['note_livraison'])) {
-            $boutonNote = '<a href="avis.php?commande_id=' . $cmd['id'] . '" class="boutton">⭐ Noter cette commande</a>';
+            $boutonNote = '<a href="avis.php?commande_id=' . $cmd['id'] . '" class="boutton"> Noter cette commande</a>';
         } elseif (!empty($cmd['note_livraison'])) {
-            $boutonNote = '<p>⭐ Note livraison : ' . $cmd['note_livraison'] . '/5 — Produits : ' . $cmd['note_produit'] . '</p>';
+            $boutonNote = '<p> Note livraison : ' . $cmd['note_livraison'] . '/5 — Produits : ' . $cmd['note_produit'] . '</p>';
         }
 
         $idCmd      = $cmd['id'];
