@@ -3,22 +3,26 @@ require_once('./fonctionphp/constantes.inc.php');
 require_once('./fonctionphp/fonctions.inc.php');
 
 session_start();
-
+// Redirige vers la connexion si pas connecté et redirige si connecté mais pas avec le rôle livreur
 redirecterSiNonConnecte('./Connexion.php');
 redirecterSiMauvaisRole('livreur', './Connexion.php');
 
+// Récupère l'id du livreur connecté depuis la session, charge tout le fichier commande.json, plats.json et utilisateurs.json en tableau PHP
 $livreurId    = $_SESSION[SESSION_ID];
 $commandes    = lireCommandes();
 $plats        = lirePlats();
 $utilisateurs = lireUtilisateurs();
 
+//message de confirmation à afficher
 $message = "";
+
+// Vérifie le formulaire POST
 if (isset($_POST['action']) && isset($_POST['commande_id'])) {
     $cid    = (int)$_POST['commande_id'];
     $action = $_POST['action'];
-    $cmdVerif = chercherCommandeParId($commandes, $cid);
+    $cmdVerif = chercherCommandeParId($commandes, $cid);   // Cherche la commande dans le tableau par son id
 
-    if ($cmdVerif !== false && $cmdVerif['livreur_id'] == $livreurId) {
+    if ($cmdVerif !== false && $cmdVerif['livreur_id'] == $livreurId) {  // Vérifie que la commande existe et appartient bien au livreur
         if ($action === 'livree') {
             mettreAJourStatutCommande($cid, 'livree');
             $message = "✅ Commande #$cid marquée comme livrée.";
@@ -29,7 +33,7 @@ if (isset($_POST['action']) && isset($_POST['commande_id'])) {
         $commandes = lireCommandes();
     }
 }
-
+// Filtre les commandes pour ne garder que celles de ce livreur
 $mesCommandes = commandesDuLivreur($commandes, $livreurId);
 $enCours   = [];
 $terminees = [];
@@ -129,7 +133,7 @@ if (empty($enCours)) {
         </div>';
     }
 }
-
+// Affiche l historique si il y a des commandes terminées
 if (!empty($terminees)) {
     echo '<h2 class="sous-titre">Livraisons terminées</h2>';
     foreach ($terminees as $cmd) {
