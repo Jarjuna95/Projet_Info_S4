@@ -118,4 +118,18 @@ function chercherPlatParId($plats, $id) {
     return false;
 }
 
+
+// Retourne toutes les commandes d un client par son id
+function commandesDuClient($commandes, $clientId) {
+    $res = [];
+    foreach ($commandes as $c) {
+        if ($c['client_id'] == $clientId) $res[] = $c;
+    }
+    return $res;
+}
+
+// Vérifie si une commande est notable (livrée + pas encore notée)
+function estNotable($cmd) {
+    return $cmd['statut'] === 'livree' && empty($cmd['note_livraison']);
+}
 ?>
