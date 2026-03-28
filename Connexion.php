@@ -30,7 +30,15 @@ if (isset($_POST['se_connecter'])) {
             $_SESSION['role']        = $utilisateur['role'];
             $_SESSION['nom']         = $utilisateur['nom'];
             $_SESSION['prenom']      = $utilisateur['prenom'];
-            header('Location: ./profil.php');
+            if ($utilisateur['role'] === 'livreur') {
+                header('Location: ./Livreur.php');
+            } elseif ($utilisateur['role'] === 'restaurateur') {
+                header('Location: ./Commande.html');
+            } elseif ($utilisateur['role'] === 'admin') {
+                header('Location: ./admin.html');
+            } else {
+                header('Location: ./profil.php');
+            }
             exit(0);
         } else {
             $erreur = "Email ou mot de passe incorrect.";
