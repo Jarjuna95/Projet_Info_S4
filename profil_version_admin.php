@@ -88,6 +88,12 @@ if (empty($mesCommandes)) {
             <div class="ligneprofil"><p>Adresse :</p><span><?php echo $utilisateur['adresse']; ?></span></div>
             <div class="ligneprofil"><p>Inscription :</p><span><?php echo $utilisateur['date_inscription']; ?></span></div>
             <div class="ligneprofil"><p>Points fidélité :</p><span><?php echo $utilisateur['points_fidelite']; ?> pts</span></div>
+            <div class="admin_bouttons">
+                <button class="boutton">Bloquer le compte</button>
+                <button class="boutton">Désactiver le compte</button>
+                <button class="boutton">Passer Premium</button>
+                <button class="boutton">Passer VIP</button>
+            </div>
         </section>
     </div>
 
