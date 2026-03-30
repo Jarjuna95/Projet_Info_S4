@@ -1,41 +1,42 @@
 <?php
 require_once('./fonctionphp/constantes.inc.php');
 require_once('./fonctionphp/fonctions.inc.php');
-
+ 
 session_start();
-
+ 
 redirecterSiConnecte('./profil.php'); // Si l utilisateur est deja connecte on le redirige vers son profil
-
+ 
 $erreur = "";
-
+ 
 if (isset($_POST['se_connecter'])) {
     if (!isset($_POST['email']) || !isset($_POST['mdp'])) {
         header('Location: ./Connexion.php');
         exit(0);
     }
-
+ 
     $email = $_POST['email'];
     $mdp   = $_POST['mdp'];
-
+ 
     $data = lireUtilisateurs();
-
+ 
     if ($data === false) {
         $erreur = "Erreur interne : impossible de lire les données.";
     } else {
         // Vérification des identifiants
         $utilisateur = verifierIdentifiants($data, $email, $mdp);
-
+ 
         if ($utilisateur !== false) {
             $_SESSION[SESSION_LOGIN] = $utilisateur['login'];
-            $_SESSION['role']        = $utilisateur['role'];
+            $_SESSION[SESSION_ROLE]  = $utilisateur['role'];
+            $_SESSION[SESSION_ID]    = $utilisateur['id'];
             $_SESSION['nom']         = $utilisateur['nom'];
             $_SESSION['prenom']      = $utilisateur['prenom'];
             if ($utilisateur['role'] === 'livreur') {
                 header('Location: ./Livreur.php');
             } elseif ($utilisateur['role'] === 'restaurateur') {
-                header('Location: ./Commande.html');
+                header('Location: ./Commande.php');
             } elseif ($utilisateur['role'] === 'admin') {
-                header('Location: ./admin.html');
+                header('Location: ./admin.php');
             } else {
                 header('Location: ./profil.php');
             }
@@ -46,7 +47,7 @@ if (isset($_POST['se_connecter'])) {
     }
 }
 ?>
-
+ 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -54,15 +55,15 @@ if (isset($_POST['se_connecter'])) {
     <title>Page de Connexion</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
+ 
 <body class="fond-image">
     <div class="page-centree">
-
+ 
         <div id="conteneur">
             <form name="connexion" method="post" action="#">
                 <fieldset>
                     <legend>Connexion</legend>
-
+ 
                     <div class="div1">Email</div>
                     <div class="div2">
                         <input type="email" name="email" class="champ" required />
@@ -72,18 +73,18 @@ if (isset($_POST['se_connecter'])) {
                     <div class="div2">
                         <input type="password" name="mdp" class="champ" required />
                     </div><br />
-
+ 
                     <div class="div1"></div>
                     <div class="div2">
                         <input type="submit" name="se_connecter" value="Se connecter" class="boutton" />
                     </div><br />
-
+ 
                 </fieldset>
             </form>
             <a href="Inscription.php" class="creer-compte">Créer un compte</a>
         </div>
-
+ 
     </div>
-
+ 
 </body>
 </html>
