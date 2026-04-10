@@ -4,28 +4,49 @@
         "client_id": 1,
         "livreur_id": 9,
         "plats": [
-            {"plat_id": 5, "quantite": 1},
-            {"plat_id": 1, "quantite": 1},
-            {"plat_id": 15, "quantite": 2}
+            {
+                "plat_id": 5,
+                "quantite": 1
+            },
+            {
+                "plat_id": 1,
+                "quantite": 1
+            },
+            {
+                "plat_id": 15,
+                "quantite": 2
+            }
         ],
         "adresse_livraison": "12 rue des ZZZ, 95000 Cergy",
         "code_interphone": "1234",
         "etage": "2ème étage",
         "commentaire": "Sonner deux fois s'il vous plaît",
-        "statut": "en_livraison",
+        "statut": "livree",
         "date_commande": "2026-03-28 12:30:00",
         "heure_livraison_souhaitee": null,
-        "prix_total": 85.00,
-        "statut_paiement": "paye"
+        "prix_total": 85,
+        "statut_paiement": "paye",
+        "note_livraison": 5,
+        "note_produit": "excellent",
+        "avis_commentaire": ""
     },
     {
         "id": 1002,
         "client_id": 2,
         "livreur_id": null,
         "plats": [
-            {"plat_id": 6, "quantite": 2},
-            {"plat_id": 13, "quantite": 2},
-            {"plat_id": 14, "quantite": 2}
+            {
+                "plat_id": 6,
+                "quantite": 2
+            },
+            {
+                "plat_id": 13,
+                "quantite": 2
+            },
+            {
+                "plat_id": 14,
+                "quantite": 2
+            }
         ],
         "adresse_livraison": "5 rue du Ballon, 75000 Paris",
         "code_interphone": "0000",
@@ -34,7 +55,7 @@
         "statut": "en_preparation",
         "date_commande": "2026-03-28 12:45:00",
         "heure_livraison_souhaitee": null,
-        "prix_total": 138.00,
+        "prix_total": 138,
         "statut_paiement": "paye"
     },
     {
@@ -42,8 +63,14 @@
         "client_id": 3,
         "livreur_id": null,
         "plats": [
-            {"plat_id": 8, "quantite": 1},
-            {"plat_id": 15, "quantite": 1}
+            {
+                "plat_id": 8,
+                "quantite": 1
+            },
+            {
+                "plat_id": 15,
+                "quantite": 1
+            }
         ],
         "adresse_livraison": "7 rue du Soleil, 69000 Lyon",
         "code_interphone": "",
@@ -52,7 +79,7 @@
         "statut": "a_preparer",
         "date_commande": "2026-03-28 13:00:00",
         "heure_livraison_souhaitee": "2026-03-28 14:30:00",
-        "prix_total": 44.00,
+        "prix_total": 44,
         "statut_paiement": "paye"
     },
     {
@@ -60,9 +87,18 @@
         "client_id": 4,
         "livreur_id": 9,
         "plats": [
-            {"plat_id": 7, "quantite": 1},
-            {"plat_id": 11, "quantite": 1},
-            {"plat_id": 14, "quantite": 1}
+            {
+                "plat_id": 7,
+                "quantite": 1
+            },
+            {
+                "plat_id": 11,
+                "quantite": 1
+            },
+            {
+                "plat_id": 14,
+                "quantite": 1
+            }
         ],
         "adresse_livraison": "3 impasse des Ossements, 13000 Marseille",
         "code_interphone": "5678",
@@ -71,7 +107,7 @@
         "statut": "livree",
         "date_commande": "2026-03-27 19:00:00",
         "heure_livraison_souhaitee": null,
-        "prix_total": 78.00,
+        "prix_total": 78,
         "statut_paiement": "paye"
     },
     {
@@ -79,10 +115,22 @@
         "client_id": 5,
         "livreur_id": null,
         "plats": [
-            {"plat_id": 3, "quantite": 2},
-            {"plat_id": 9, "quantite": 1},
-            {"plat_id": 12, "quantite": 2},
-            {"plat_id": 15, "quantite": 2}
+            {
+                "plat_id": 3,
+                "quantite": 2
+            },
+            {
+                "plat_id": 9,
+                "quantite": 1
+            },
+            {
+                "plat_id": 12,
+                "quantite": 2
+            },
+            {
+                "plat_id": 15,
+                "quantite": 2
+            }
         ],
         "adresse_livraison": "25 rue des Pokémons, 33000 Bordeaux",
         "code_interphone": "",
@@ -91,7 +139,7 @@
         "statut": "en_attente",
         "date_commande": "2026-03-28 13:15:00",
         "heure_livraison_souhaitee": null,
-        "prix_total": 116.00,
+        "prix_total": 116,
         "statut_paiement": "paye"
     }
 ]
