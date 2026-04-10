@@ -24,6 +24,22 @@
     z-index: 1000; /* pour être au-dessus du reste du contenu */
 }
 
+#frontmini {
+    display: flex;  /*centrer le titre*/
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 80px;
+    background: linear-gradient(to bottom, rgb(184, 148, 58), rgb(192, 173, 125));
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0; 
+    z-index: 1000; /* pour être au-dessus du reste du contenu */
+}
+
+
+
 #diffpages {
     display: flex;
     flex-direction: column;
@@ -55,6 +71,21 @@
     font-weight: 700;
     font-size: 24px; 
 }
+
+.panierbouton {
+    position: absolute;        /* on sort du flux flex pour le mettre à droite */
+    left: 50px;               /* distance par rapport au bord droit */
+    top: 50%;                  /* centre vertical */
+    transform: translateY(-50%); /* ajuste le centre exact vertical usage de chatgpt pour positioner correctement le bouton car il n'était pas aligné */
+    background-color: linear-gradient(to bottom, rgb(184, 148, 58), rgb(192, 173, 125));
+    color: white;
+    padding: 10px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 24px; 
+}
+
 
 .ptitre {
     display: flex;  /*centrer le titre*/
@@ -234,16 +265,39 @@ legend {
     background-repeat: no-repeat;
 }
 
+.deja-panier {
+    color: rgb(191, 167, 106);
+    font-weight: bold;
+    font-size: 13px;
+    margin-top: 6px;
+}
 
 .boutton {
     background-color: rgb(191, 167, 106); 
     color: black ;         
     font-weight: bold;
+    text-decoration: none;
     font-size: 18px;
     padding: 15px 30px;
     min-width: 200px;
     cursor: pointer;
     border: 2px rgb(191, 167, 106);
+    border-radius: 30px;
+    display: block;
+    margin: 20px auto; 
+    transition: 0.3s;
+}
+
+.bouttonpanier {
+    background-color: rgb(124, 112, 82); 
+    color: black ;         
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 15px 30px;
+    min-width: 200px;
+    cursor: pointer;
+    border: 2px rgb(124, 112, 82);
     border-radius: 30px;
     display: block;
     margin: 20px auto; 
@@ -528,4 +582,50 @@ legend {
     border-radius: 50px;    
     padding: 10px 20px;
     margin: 5px;
+}
+
+.etoiles {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    gap: 6px;
+    margin: 10px 0 20px;
+}
+
+.etoiles input {
+    display: none;
+}
+
+.etoiles label {
+    font-size: 40px;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.etoiles input:checked ~ label,
+.etoiles label:hover,
+.etoiles label:hover ~ label {
+    color: rgb(191, 167, 106);
+}
+
+.message-succes {
+    color: rgb(46, 125, 50);
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.message-erreur {
+    color: #c0392b;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.deja-note {
+    text-align: center;
+    color: rgb(127, 103, 6);
+    font-style: italic;
+    margin: 10px 0 20px;
 }
