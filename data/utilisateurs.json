@@ -13,7 +13,7 @@
         "points_fidelite": 150
     },
     {
-    "id": 2,
+        "id": 2,
         "login": "messi10@gmail.com",
         "mot_de_passe": "12345678910",
         "role": "client",
@@ -115,38 +115,18 @@
         "date_inscription": "2025-09-01",
         "statut": "actif",
         "points_fidelite": 0
+    },
+    {
+        "id": 10,
+        "login": "zzz@gmail.com",
+        "mot_de_passe": "bmw123",
+        "role": "client",
+        "nom": "Jee",
+        "prenom": "Arj",
+        "adresse": "4 rue de la ZZZ",
+        "telephone": "0678911234",
+        "date_inscription": "2026-03-30",
+        "statut": "actif",
+        "points_fidelite": 0
     }
 ]
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
