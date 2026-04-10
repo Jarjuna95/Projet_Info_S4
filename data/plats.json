@@ -1,17 +1,201 @@
 [
-    {"id": 1, "nom": "Carpaccio de bœuf Wagyu à la truffe noire", "description": "Bœuf Wagyu, huile de truffe noire, copeaux de parmesan affiné", "prix": 33.00, "categorie": "entree", "allergenes": ["lait"], "calories": 280, "disponible": true},
-    {"id": 2, "nom": "Burrata des Pouilles au caviar Oscietra", "description": "Burrata artisanale, caviar Oscietra, tomates confites, huile d'olive extra vierge", "prix": 45.00, "categorie": "entree", "allergenes": ["lait"], "calories": 320, "disponible": true},
-    {"id": 3, "nom": "Vitello Tonnato", "description": "Fines tranches de veau, sauce thon-câpres, anchois, citron", "prix": 22.00, "categorie": "entree", "allergenes": ["poisson", "oeuf"], "calories": 260, "disponible": true},
-    {"id": 4, "nom": "Antipasto della Casa", "description": "Charcuteries italiennes, olives marinées, bruschetta, légumes grillés", "prix": 18.00, "categorie": "entree", "allergenes": ["gluten"], "calories": 350, "disponible": true},
-    {"id": 5, "nom": "Tagliolini au homard bleu", "description": "Tagliolini frais, homard bleu méditerranéen, beurre, citron, herbes fines", "prix": 67.00, "categorie": "plat", "allergenes": ["gluten", "crustaces", "lait"], "calories": 680, "disponible": true},
-    {"id": 6, "nom": "La Dolce Nobiltà", "description": "Mozzarella di bufala, truffe blanche d'Alba, jambon de Parme, roquette, huile d'olive extra vierge", "prix": 55.00, "categorie": "plat", "allergenes": ["lait"], "calories": 590, "disponible": true},
-    {"id": 7, "nom": "Osso Buco alla Milanese", "description": "Jarret de veau braisé, gremolata, risotto au safran", "prix": 42.00, "categorie": "plat", "allergenes": ["lait", "gluten"], "calories": 720, "disponible": true},
-    {"id": 8, "nom": "Risotto ai Funghi Porcini", "description": "Risotto crémeux aux cèpes, parmesan affiné 24 mois, truffe noire", "prix": 38.00, "categorie": "plat", "allergenes": ["lait"], "calories": 610, "disponible": true},
-    {"id": 9, "nom": "Saltimbocca alla Romana", "description": "Escalopes de veau, jambon de Parme, sauge, vin blanc, beurre", "prix": 36.00, "categorie": "plat", "allergenes": ["lait"], "calories": 540, "disponible": true},
-    {"id": 10, "nom": "Branzino al Forno", "description": "Loup de mer entier rôti, légumes du marché, huile d'olive, herbes aromatiques", "prix": 44.00, "categorie": "plat", "allergenes": ["poisson"], "calories": 480, "disponible": true},
-    {"id": 11, "nom": "Cannoli Siciliani à la pistache de Bronte", "description": "Ricotta fine, pistaches vertes de Bronte, pâte croquante", "prix": 22.00, "categorie": "dessert", "allergenes": ["gluten", "lait", "fruits_a_coque"], "calories": 380, "disponible": true},
-    {"id": 12, "nom": "Tiramisù Royal", "description": "Mascarpone artisanal, café arabica, cacao grand cru, copeaux de chocolat noir", "prix": 24.00, "categorie": "dessert", "allergenes": ["gluten", "lait", "oeuf"], "calories": 420, "disponible": true},
-    {"id": 13, "nom": "Panna Cotta au coulis de fruits rouges", "description": "Panna cotta à la vanille de Madagascar, coulis de framboise et fraise", "prix": 16.00, "categorie": "dessert", "allergenes": ["lait"], "calories": 310, "disponible": true},
-    {"id": 14, "nom": "Barolo Chinato", "description": "Digestif piémontais à base de Barolo, quinquina et épices, 8cl", "prix": 14.00, "categorie": "boisson", "allergenes": [], "calories": 120, "disponible": true},
-    {"id": 15, "nom": "Eau minérale San Pellegrino", "description": "Eau gazeuse italienne, 75cl", "prix": 6.00, "categorie": "boisson", "allergenes": [], "calories": 0, "disponible": true}
+  {
+    "id": 1,
+    "nom": "Carpaccio de bœuf Wagyu à la truffe noire",
+    "description": "Bœuf Wagyu, huile de truffe noire, copeaux de parmesan affiné",
+    "prix": 33,
+    "categorie": "entree",
+    "allergenes": [
+      "lait"
+    ],
+    "calories": 280,
+    "disponible": true,
+    "image": "https://www.shoplongino.ae/media/wysiwyg/Ricette_magazine_6.jpg"
+  },
+  {
+    "id": 2,
+    "nom": "Burrata des Pouilles au caviar Oscietra",
+    "description": "Burrata artisanale, caviar Oscietra, tomates confites, huile d'olive extra vierge",
+    "prix": 45,
+    "categorie": "entree",
+    "allergenes": [
+      "lait"
+    ],
+    "calories": 320,
+    "disponible": true,
+    "image": "https://truffe-passion.fr/wp-content/uploads/2025/12/1766018256-burrata-caviar-daubergine-et-truite-ou-anguille-fumee-recette-gourmande-1024x590.jpg"
+  },
+  {
+    "id": 3,
+    "nom": "Vitello Tonnato",
+    "description": "Fines tranches de veau, sauce thon-câpres, anchois, citron",
+    "prix": 22,
+    "categorie": "entree",
+    "allergenes": [
+      "poisson",
+      "oeuf"
+    ],
+    "calories": 260,
+    "disponible": true,
+    "image": "https://recette-italienne.fr/wp-content/uploads/2020/12/image00019.jpeg"
+  },
+  {
+    "id": 4,
+    "nom": "Antipasto della Casa",
+    "description": "Charcuteries italiennes, olives marinées, bruschetta, légumes grillés",
+    "prix": 18,
+    "categorie": "entree",
+    "allergenes": [
+      "gluten"
+    ],
+    "calories": 350,
+    "disponible": true,
+    "image": "https://cache.marieclaire.fr/data/photo/w1200_h630_ci/5f/bruschetta-de-thon-aux-olives-et-aux-pignons.jpg"
+  },
+  {
+    "id": 5,
+    "nom": "Tagliolini au homard bleu",
+    "description": "Tagliolini frais, homard bleu méditerranéen, beurre, citron, herbes fines",
+    "prix": 67,
+    "categorie": "plat",
+    "allergenes": [
+      "gluten",
+      "crustaces",
+      "lait"
+    ],
+    "calories": 680,
+    "disponible": true,
+    "image": "https://difalux.be/wp-content/uploads/2022/01/tagliatelles-sauce-homardine-avec-morceaux-de-homard-parfumees-a-lestragon-br.jpg"
+  },
+  {
+    "id": 6,
+    "nom": "La Dolce Nobiltà",
+    "description": "Mozzarella di bufala, truffe blanche d'Alba, jambon de Parme, roquette, huile d'olive extra vierge",
+    "prix": 55,
+    "categorie": "plat",
+    "allergenes": [
+      "lait"
+    ],
+    "calories": 590,
+    "disponible": true,
+    "image": "https://s3-eu-west-1.amazonaws.com/images-ca-1-0-1-eu/recipe_photos/original/199124/ob_aa5459_pizza-truffe.jpg"
+  },
+  {
+    "id": 7,
+    "nom": "Osso Buco alla Milanese",
+    "description": "Jarret de veau braisé, gremolata, risotto au safran",
+    "prix": 42,
+    "categorie": "plat",
+    "allergenes": [
+      "lait",
+      "gluten"
+    ],
+    "calories": 720,
+    "disponible": true,
+    "image": "https://thumbs.dreamstime.com/b/exquis-repas-osso-buco-avec-risotto-safran-et-gremolata-topping-une-prise-au-dessus-présente-deux-jarretelles-de-veau-braisées-397695946.jpg"
+  },
+  {
+    "id": 8,
+    "nom": "Risotto ai Funghi Porcini",
+    "description": "Risotto crémeux aux cèpes, parmesan affiné 24 mois, truffe noire",
+    "prix": 38,
+    "categorie": "plat",
+    "allergenes": [
+      "lait"
+    ],
+    "calories": 610,
+    "disponible": true,
+    "image": "https://www.delhaize.lu/fr/file/23707.recipes-single/e43e12c8abe8f7d366cb60e48507f8f6/rizotto_truffe_recette-01.png"
+  },
+  {
+    "id": 9,
+    "nom": "Saltimbocca alla Romana",
+    "description": "Escalopes de veau, jambon de Parme, sauge, vin blanc, beurre",
+    "prix": 36,
+    "categorie": "plat",
+    "allergenes": [
+      "lait"
+    ],
+    "calories": 540,
+    "disponible": true,
+    "image": "https://www.maisonvictor.fr/img/cms/Escalope-de-Veau-plat.jpg"
+  },
+  {
+    "id": 10,
+    "nom": "Branzino al Forno",
+    "description": "Loup de mer entier rôti, légumes du marché, huile d'olive, herbes aromatiques",
+    "prix": 44,
+    "categorie": "plat",
+    "allergenes": [
+      "poisson"
+    ],
+    "calories": 480,
+    "disponible": true,
+    "image": "https://images.immediate.co.uk/production/volatile/sites/57/2024/03/110320241710180472.jpeg?quality=90&resize=708,643"
+  },
+  {
+    "id": 11,
+    "nom": "Cannoli Siciliani à la pistache de Bronte",
+    "description": "Ricotta fine, pistaches vertes de Bronte, pâte croquante",
+    "prix": 22,
+    "categorie": "dessert",
+    "allergenes": [
+      "gluten",
+      "lait",
+      "fruits_a_coque"
+    ],
+    "calories": 380,
+    "disponible": true,
+    "image": "https://img.static-rmg.be/a/food/image/q75/w640/h400/1099431/cannoli-pistache-citron.jpg"
+  },
+  {
+    "id": 12,
+    "nom": "Tiramisù Royal",
+    "description": "Mascarpone artisanal, café arabica, cacao grand cru, copeaux de chocolat noir",
+    "prix": 24,
+    "categorie": "dessert",
+    "allergenes": [
+      "gluten",
+      "lait",
+      "oeuf"
+    ],
+    "calories": 420,
+    "disponible": true,
+    "image": "https://files.meilleurduchef.com/mdc/photo/recette/tiramisu/tiramisu-1200.jpg"
+  },
+  {
+    "id": 13,
+    "nom": "Panna Cotta au coulis de fruits rouges",
+    "description": "Panna cotta à la vanille de Madagascar, coulis de framboise et fraise",
+    "prix": 16,
+    "categorie": "dessert",
+    "allergenes": [
+      "lait"
+    ],
+    "calories": 310,
+    "disponible": true,
+    "image": "https://cache.marieclaire.fr/data/photo/w1200_h630_ci/1v0/recette-panna-cota-vegan-coulis-framboise.jpg"
+  },
+  {
+    "id": 14,
+    "nom": "Barolo Chinato",
+    "description": "Digestif piémontais à base de Barolo, quinquina et épices, 8cl",
+    "prix": 14,
+    "categorie": "boisson",
+    "allergenes": [],
+    "calories": 120,
+    "disponible": true,
+    "image": "https://images.prismic.io/idealwine/acpoG5GXnQHGZF2n_2026-03-27-OL.jpg?auto=format&fit=max&w=3840"
+  },
+  {
+    "id": 15,
+    "nom": "Eau minérale San Pellegrino",
+    "description": "Eau gazeuse italienne, 75cl",
+    "prix": 6,
+    "categorie": "boisson",
+    "allergenes": [],
+    "calories": 0,
+    "disponible": true,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Sanpellegrino_Bottle.jpg"
+  }
 ]
