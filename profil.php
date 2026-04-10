@@ -95,7 +95,7 @@ if (empty($mesCommandes)) {
     </div>
 
     <div class="lien-deconnexion">
-        <a href="deconnexion.php">Se déconnecter</a>
+        <a href="deconnexion.php" class="boutton">🚪 Se déconnecter</a>
     </div>
 </body>
 </html>
