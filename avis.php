@@ -9,7 +9,7 @@ redirecterSiMauvaisRole('client', './Connexion.php');
 $clientId   = $_SESSION[SESSION_ID];
 $commandes  = lireCommandes();
 $commandeId = isset($_GET['commande_id']) ? (int)$_GET['commande_id'] : 0; // Récupère l id de la commande passé en GET dans l URL
-$cmd        = chercherCommandeParId($commandes, $commandeId)// Cherche la commande par son id;
+$cmd        = chercherCommandeParId($commandes, $commandeId);// Cherche la commande par son id;
 
 if ($cmd === false || $cmd['client_id'] != $clientId || $cmd['statut'] !== 'livree') {// Vérifie que la commande existe, appartient au client, et est bien livrée
     header('Location: ./profil.php');// Redirige vers le profil si la commande n est pas notable
@@ -17,6 +17,7 @@ if ($cmd === false || $cmd['client_id'] != $clientId || $cmd['statut'] !== 'livr
 }
 
 $message = "";
+$avisenvoye = false;
 if (isset($_POST['envoyer_avis'])) {
     $note_livraison = isset($_POST['note_livraison']) ? (int)$_POST['note_livraison'] : 0;
     $note_produit   = isset($_POST['note_produit'])   ? $_POST['note_produit']        : '';
@@ -33,6 +34,7 @@ if (isset($_POST['envoyer_avis'])) {
         }
         ecrireCommandes($commandes);// Réécrit tout le fichier commande.json avec les notes ajoutées
         $message = "✅ Merci pour votre avis !";
+        $avisenvoye = true;
     } else {
         $message = "❌ La note doit être entre 1 et 5.";
     }
@@ -47,14 +49,15 @@ if (isset($_POST['envoyer_avis'])) {
 </head>
 <body class="fond-image">
 <div class="page-centree">
-    <div id="conteneur">
+    <fieldset>
 
-        <?php if ($message !== ""): ?>
-            <p style="color:green;"><?php echo $message; ?></p>
-            <?php if (strpos($message, '✅') !== false): ?>
-                <a href="profil.php" class="boutton">← Retour au profil</a>
-            <?php endif; ?>
-        <?php endif; ?>
+        <?php if ($avisenvoye) { ?>
+            <p><?php echo $message; ?></p>
+            <a href="profil.php" class="boutton">← Retour au profil</a>
+        <?php } ?>
+        <?php if ($message !== "" && !$avisenvoye) { ?>
+            <p><?php echo $message; ?></p>
+        <?php } ?>
 
         <form name="notation" method="post" action="avis.php?commande_id=<?php echo $commandeId; ?>">
             <fieldset>
@@ -87,7 +90,7 @@ if (isset($_POST['envoyer_avis'])) {
             </fieldset>
         </form>
         <a href="profil.php">← Retour au profil</a>
-    </div>
+    </fieldset>
 </div>
 </body>
 </html>
