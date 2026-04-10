@@ -3,14 +3,14 @@ require_once('./fonctionphp/constantes.inc.php');
 require_once('./fonctionphp/fonctions.inc.php');
 session_start();
 redirecterSiNonConnecte('./Connexion.php');
-redirecterSiMauvaisRole('client', './Connexion.php');
+redirecterSiMauvaisRole('admin', './Connexion.php');
 
-$clientId     = $_SESSION[SESSION_ID];
+$clientId     = $_GET['id'];;
 $utilisateurs = lireUtilisateurs();
 $commandes    = lireCommandes();
 $plats        = lirePlats();
 
-$client = chercherUtilisateurParId($utilisateurs, $clientId);
+$utilisateur = chercherUtilisateurParId($utilisateurs, $clientId);
 
 $mesCommandes = [];
 foreach ($commandes as $c) {
@@ -77,7 +77,7 @@ if (empty($mesCommandes)) {
     <div class="profilbox">
         <section>
             <div class="premierelp">
-                <h2 class="titre">Information de <?php echo $utilisateur['prenom']?>;</h2>
+                <h2 class="titre">Information de <?php echo $utilisateur['prenom']?></h2>
             </div>
             <div class="ligneprofil"><p>Nom :</p><span><?php echo $utilisateur['nom']; ?></span></div>
             <div class="ligneprofil"><p>Prénom :</p><span><?php echo $utilisateur['prenom']; ?></span></div>
