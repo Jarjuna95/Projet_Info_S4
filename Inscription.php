@@ -1,5 +1,5 @@
 <?php
-require_once('./constantes.inc.php');
+require_once('./fonctionphp/constantes.inc.php');
 require_once('./fonctionphp/fonctions.inc.php');
 
 session_start();
@@ -32,7 +32,11 @@ if (isset($_POST['sinscrire'])) {
 
         } else {
             $nouvelUtilisateur = [];
-            $nouvelUtilisateur['id']               = count($data) + 1;
+            $maxId = 0;
+            foreach($data as $u) {
+                if($u['id'] > $maxId) $maxId = $u['id'];
+            }
+            $nouvelUtilisateur['id'] = $maxId + 1;
             $nouvelUtilisateur['login']            = $email;
             $nouvelUtilisateur['mot_de_passe']         = $mdp;
             $nouvelUtilisateur['role']             = "client";
