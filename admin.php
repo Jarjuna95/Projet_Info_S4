@@ -29,21 +29,17 @@ $utilisateurs = lireUtilisateurs();
             <tr> <th>Nom</th> <th>Prénom</th> <th>Mail</th> <th>Date d'inscription</th> <th>Statut</th> <th>Profil</th> </tr>
         </thead>
         <tbody>
-                <?php for ($i = 0; $i < count($utilisateurs); $i++): ?>
-                <tr>
-                    <td><?php echo $utilisateurs[$i]['nom']; ?></td>
-                    <td><?php echo $utilisateurs[$i]['prenom']; ?></td>
-                    <td><?php echo $utilisateurs[$i]['login']; ?></td>
-                    <td><?php echo $utilisateurs[$i]['date_inscription']; ?></td>
-                    <td><?php echo ucfirst($utilisateurs[$i]['statut']); ?></td>
-                    <td>
-                        <a href="profil_version_admin.php?id=<?php echo $u['id']; ?>" class="boutton"> //permettant ainsi d'accéder à la page admin par rapport au différent utilisateur
-                            Voir le profil
-                        </a>
-                    </td>
-                </tr>
-                <?php endfor; ?>
-            </tbody>
+            <?php foreach($utilisateurs as $u): ?>
+            <tr>
+                <td><?php echo $u['nom']; ?></td>
+                <td><?php echo $u['prenom']; ?></td>
+                <td><?php echo $u['login']; ?></td>
+                <td><?php echo $u['date_inscription']; ?></td>
+                <td><?php echo ucfirst($u['statut']); ?></td>
+                <td><a href="profil_version_admin.php?id=<?php echo $u['id']; ?>" class="boutton">Voir le profil</a></td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
         </table>
     </section>
 </body>
