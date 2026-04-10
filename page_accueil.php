@@ -9,7 +9,7 @@
 
 <header id="front">
     <h1>La Confrérie</h1>
-    <a href="Connexion.html" class="connecterbouton">👤 Se Connecter</a>
+    <a href="Connexion.php" class="connecterbouton">👤 Se Connecter</a>
 </header>
 
 <section id="presentation">
@@ -19,12 +19,7 @@
            <h2>Restaurant Italien</h2>
            <p>Chef Isshin Ashina</p>
 		   <nav id="diffpages">
-               <a href="presentation.html">Nos Plats</a>
-               <a href="profil.html">Profil</a>
-               <a href="admin.html">Admin</a>
-               <a href="Commande.html">Commandes</a>
-               <a href="Livreur.html">Livraison</a>
-               <a href="avis.html">Notation</a>
+               <a href="carte.php">Nos Plats</a>
            </nav>
        </div>
    </div>
