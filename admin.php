@@ -42,5 +42,8 @@ $utilisateurs = lireUtilisateurs();
         </tbody>
         </table>
     </section>
+    <div class="lien-deconnexion">
+        <a href="deconnexion.php" class="boutton">🚪 Se déconnecter</a>
+    </div>
 </body>
 </html>
