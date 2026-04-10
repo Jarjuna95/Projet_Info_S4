@@ -38,7 +38,7 @@ if (isset($_POST['se_connecter'])) {
             } elseif ($utilisateur['role'] === 'admin') {
                 header('Location: ./admin.php');
             } else {
-                header('Location: ./profil.php');
+                header('Location: ./page_accueil_connecte.php');
             }
             exit(0);
         } else {
@@ -55,6 +55,11 @@ if (isset($_POST['se_connecter'])) {
     <title>Page de Connexion</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
+<header id="frontmini">
+    <a href="page_accueil.php" class="panierbouton">Accueil</a>
+    <h1>La Confrerie</h1>
+</header>
  
 <body class="fond-image">
     <div class="page-centree">
