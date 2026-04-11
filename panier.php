@@ -15,6 +15,19 @@ if (isset($_POST['retirer_id'])) {
     header('Location: panier.php');
     exit(0);
 }
+
+// Aller au paiement
+if (isset($_POST['payer'])) {
+    if ($_POST['type_livraison'] === 'plus_tard') {
+        $_SESSION['type_livraison']  = 'plus_tard';
+        $_SESSION['heure_livraison'] = $_POST['heure_livraison'];
+    } else {
+        $_SESSION['type_livraison']  = 'immediate';
+        $_SESSION['heure_livraison'] = null;
+    }
+    header('Location: paiement.php');
+    exit(0);
+}
  
 // Vider le panier
 if (isset($_POST['vider'])) {
