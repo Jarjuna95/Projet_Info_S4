@@ -180,9 +180,9 @@ foreach ($mesCommandes as $c) {
         </div>
     <?php endif; ?>
 
-    <div style="text-align:center; margin: 40px auto 60px;">
-        <a href="deconnexion.php" class="boutton" style="max-width:200px;">Se déconnecter</a>
+    <div class="lien-deconnexion">
+        <a href="deconnexion.php" class="boutton">🚪 Se déconnecter</a>
     </div>
-
+    
 </body>
 </html>
