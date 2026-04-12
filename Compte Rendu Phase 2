@@ -1,0 +1,18 @@
+Arjuna:
+Durant cette phase, j'ai développé les pages suivantes : la page d'inscription, la page de connexion, la page administrateur avec accès aux profils utilisateurs,
+la page panier, la page paiement avec intégration CYBank, et la page de retour paiement.
+Le principal problème technique rencontré en séance était lié à la présence en double du fichier fonctions.inc.php, ce qui empêchait le lancement du serveur.
+Une fois le doublon supprimé, le problème a été résolu. Concernant l'intégration de CYBank, la compréhension du mécanisme d'envoi et de retour des paramètres 
+ainsi que le calcul de la valeur de contrôle md5 était complexe. J'ai utilisé l'IA pour m'aider à comprendre le fonctionnement, ce qui m'a permis de l'implémenter
+correctement. Du côté CSS, j'ai identifié un problème d'optimisation : pour chaque bouton de formulaire PHP nécessitant un alignement à droite plutôt qu'à gauche,
+je créais une nouvelle classe CSS au lieu de réutiliser les classes existantes. Ce point a été corrigé. En dehors de ces points, le développement des autres
+pages s'est déroulé sans difficulté majeure.
+
+Parrukan:
+Durant la phase 2, j'ai développé le côté restaurateur, avec la liste détaillée des commandes ainsi que le détail d'une commande. J'ai également réalisé la 
+partie livreur et la partie client, qui permet d'accéder à sa page de profil, de consulter l'historique de ses commandes, et pour une commande récemment livrée,
+de laisser une note.
+Au cours de ce projet, j'ai rencontré des difficultés avec PHP. Cependant, en relisant le cours et en refaisant les TD, j'ai réussi à les surmonter. 
+Pour la page livreur, j'avais les fonctionnalités de base mais il me manquait le CSS ; j'ai donc réutilisé ce qui avait déjà été fait, comme pour d'autres pages.
+J'ai également ajouté un système d'étoiles pour les avis : j'ai demandé à une IA comment procéder, puis je l'ai implémenté moi-même. Je n'ai pas rencontré 
+d'autres difficultés particulières.
