@@ -10,27 +10,34 @@ $commandes    = lireCommandes();
 $plats        = lirePlats();          
 $utilisateurs = lireUtilisateurs();   
 
-$message     = "";
-$typeMessage = ""; // "succes" ou "abandon"
-
-// Traitement du formulaire POST (marquer livrée ou abandonnée)
+// Quand le livreur clique sur un bouton, fetch() envoie une requête POST vers cette même page grâce à isset($_POST['action'])
+// On traite le statut et on renvoie une réponse JSON au lieu d'afficher du HTML
 if (isset($_POST['action']) && isset($_POST['commande_id'])) {
-    $cid      = (int)$_POST['commande_id'];  
-    $action   = $_POST['action'];            
-    $cmdVerif = chercherCommandeParId($commandes, $cid); 
+    header('Content-Type: application/json');
 
-    if ($cmdVerif !== false && $cmdVerif['livreur_id'] == $livreurId) { // Vérifie que la commande existe et appartient bien au livreur
-        if ($action === 'livree') {
-            mettreAJourStatutCommande($cid, 'livree');
-            $message     = "Commande #$cid marquée comme livrée.";
-            $typeMessage = "succes";
-        } elseif ($action === 'abandonnee') {
-            mettreAJourStatutCommande($cid, 'abandonnee');
-            $message     = "Commande #$cid marquée comme abandonnée (adresse introuvable).";
-            $typeMessage = "abandon";
-        }
-        $commandes = lireCommandes(); 
+    $cid      = (int)$_POST['commande_id'];
+    $action   = $_POST['action'];
+    $cmdVerif = chercherCommandeParId($commandes, $cid);
+
+    // Vérifie que la commande existe et appartient bien à ce livreur
+    if ($cmdVerif === false || $cmdVerif['livreur_id'] != $livreurId) {
+        http_response_code(403);
+        echo json_encode(['message' => 'Accès refusé.']);
+        exit(0);
     }
+
+    // Met à jour le statut selon le bouton cliqué et renvoie un message de confirmation
+    if ($action === 'livree') {
+        mettreAJourStatutCommande($cid, 'livree');
+        echo json_encode(['message' => "✅ Commande #$cid marquée comme livrée."]);
+    } elseif ($action === 'abandonnee') {
+        mettreAJourStatutCommande($cid, 'abandonnee');
+        echo json_encode(['message' => "⚠️ Commande #$cid marquée comme abandonnée."]);
+    } else {
+        http_response_code(400);
+        echo json_encode(['message' => 'Action invalide.']);
+    }
+    exit(0);
 }
 
 // Filtre les commandes de ce livreur et les répartit par statut
@@ -56,14 +63,10 @@ foreach ($mesCommandes as $c) {
 <body id="accueil2">
 
     <h1 class="ptitre">📦 Mes livraisons</h1>
-    <p class="texte-bienvenue">Bonjour <?php echo htmlspecialchars($_SESSION['prenom'] . ' ' . $_SESSION['nom']); ?></p>
+    <p class="ptitre" style="font-size:20px;">Bonjour <?php echo htmlspecialchars($_SESSION['prenom'] . ' ' . $_SESSION['nom']); ?></p>
 
-    <?php if ($message !== ""): ?>
-        <div class="message-livreur <?php echo $typeMessage; ?>">
-            <?php if ($typeMessage === 'succes') { echo '✅ '; } else { echo '⚠️ '; } ?>
-            <?php echo htmlspecialchars($message); ?>
-        </div>
-    <?php endif; ?>
+    <!-- Zone d'affichage du message renvoyé par fetch() après action du livreur -->
+    <div id="message"></div>
 
     <h2 class="ptitre" style="font-size:30px;">🚴 En cours de livraison</h2>
 
@@ -78,8 +81,8 @@ foreach ($mesCommandes as $c) {
                 $adresse    = htmlspecialchars($cmd['adresse_livraison']);
                 $adresseEnc = urlencode($cmd['adresse_livraison']);
             ?>
-            <div class="cadre-tableau-admin" style="max-width:700px;">
-                <fieldset>
+            <!-- id unique par carte pour que JS puisse la supprimer après le clic -->
+            <fieldset id="carte-<?php echo $cmd['id']; ?>" style="max-width:700px;">
                     <legend>Commande #<?php echo $cmd['id']; ?></legend>
 
                     <div class="ligne-info">
@@ -125,20 +128,18 @@ foreach ($mesCommandes as $c) {
                         <p><strong>Total : <?php echo number_format($cmd['prix_total'], 2); ?> €</strong></p>
                     </div>
 
-                    <form method="post" action="Livreur.php">
-                        <input type="hidden" name="commande_id" value="<?php echo $cmd['id']; ?>"> 
-                        <div class="boutons-livraison">
-                            <button type="submit" name="action" value="livree" id="btn-livraison-terminer">✅ Livraison terminée</button>
-                            <button type="submit" name="action" value="abandonnee" class="btn-abandon">❌ Adresse introuvable</button>
-                        </div>
-                    </form>
+                    <!-- htmlspecialchars() convertit les " en &quot; pour ne pas casser l'attribut onclick="..." -->
+                    <div class="boutons-livraison">
+                        <button type="button" onclick="marquerCommande(<?php echo $cmd['id']; ?>, 'livree', <?php echo htmlspecialchars(json_encode($nomClient)); ?>, <?php echo htmlspecialchars(json_encode($adresse)); ?>, '<?php echo number_format($cmd['prix_total'], 2); ?>')" id="btn-livraison-terminer">✅ Livraison terminée</button>
+                        <button type="button" onclick="marquerCommande(<?php echo $cmd['id']; ?>, 'abandonnee', <?php echo htmlspecialchars(json_encode($nomClient)); ?>, <?php echo htmlspecialchars(json_encode($adresse)); ?>, '<?php echo number_format($cmd['prix_total'], 2); ?>')" class="btn-abandon">❌ Adresse introuvable</button>
+                    </div>
 
-                </fieldset>
-            </div>
+            </fieldset>
         <?php endforeach; ?>
     <?php endif; ?>
 
-    <?php if (!empty($terminees)): ?>
+    <!-- Section toujours présente dans le DOM : cachée si aucune livraison terminée au chargement -->
+    <div id="section-terminees" <?php if (empty($terminees)) echo 'style="display:none;"'; ?>>
         <h2 class="ptitre" style="font-size:30px;">📋 Livraisons terminées</h2>
         <div class="cadre-tableau-admin">
             <table>
@@ -151,7 +152,8 @@ foreach ($mesCommandes as $c) {
                         <th>Statut</th>
                     </tr>
                 </thead>
-                <tbody>
+                <!-- id="tbody-terminees" : JS cible ce tbody pour y ajouter une ligne après chaque livraison -->
+                <tbody id="tbody-terminees">
                     <?php foreach ($terminees as $cmd): ?>
                         <?php
                             $client = chercherUtilisateurParId($utilisateurs, $cmd['client_id']);
@@ -178,11 +180,65 @@ foreach ($mesCommandes as $c) {
                 </tbody>
             </table>
         </div>
-    <?php endif; ?>
+    </div>
 
     <div class="lien-deconnexion">
         <a href="deconnexion.php" class="boutton">🚪 Se déconnecter</a>
     </div>
+
+    <script>
+        // Reçoit l'id, l'action ('livree' ou 'abandonnee'), le nom du client, l'adresse et le prix
+        // Ces infos permettent d'ajouter la ligne dans le tableau sans recharger la page
+        async function marquerCommande(commandeId, action, nomClient, adresse, prix) {
+
+            // FormData prépare les données à envoyer en POST
+            // PHP les lira dans $_POST['commande_id'] et $_POST['action']
+            const donnees = new FormData();
+            donnees.append('commande_id', commandeId);
+            donnees.append('action',      action);
+
+            try {
+                // Envoie une requête POST asynchrone vers Livreur.php
+                const reponse = await fetch('./Livreur.php', {
+                    method : 'POST',
+                    body   : donnees
+                });
+
+                // Lit la réponse JSON renvoyée par le serveur PHP
+                const resultat = await reponse.json();
+
+                // Affiche le message de confirmation dans la zone #message
+                document.getElementById('message').textContent = resultat.message;
+
+                // Supprime la carte de cette commande du bloc "En cours de livraison"
+                document.getElementById('carte-' + commandeId).remove();
+
+                // Affiche la section "Livraisons terminées" si elle était cachée 
+                document.getElementById('section-terminees').style.display = '';
+
+                // Choisit le badge de statut selon l'action effectuée
+                const statut = action === 'livree'
+                    ? '<span class="statut-livree">✅ Livrée</span>'
+                    : '<span class="statut-abandonnee">⚠️ Abandonnée</span>';
+
+                // Ajoute une nouvelle ligne dans le tableau des livraisons terminées
+                // innerHTML += ajoute le HTML de la ligne à la suite des lignes existantes
+                document.getElementById('tbody-terminees').innerHTML +=
+                    '<tr>' +
+                    '<td>#' + commandeId + '</td>' +
+                    '<td>' + nomClient   + '</td>' +
+                    '<td>' + adresse     + '</td>' +
+                    '<td>' + prix        + ' €</td>' +
+                    '<td>' + statut      + '</td>' +
+                    '</tr>';
+
+            } catch (erreur) {
+                // Affiché si le serveur est inaccessible ou la réponse est invalide
+                document.getElementById('message').textContent = "Erreur : " + erreur.message;
+            }
+        }
+    </script>
     <script src="script.js"></script>
+
 </body>
 </html>
