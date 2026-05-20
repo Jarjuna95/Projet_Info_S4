@@ -68,7 +68,7 @@ if (isset($_POST['sinscrire'])) {
     <head>
         <meta charset="UTF-8" />
         <title>Page d'inscription</title>
-        <link rel="stylesheet" href="style.css">
+        <link id="css_mode" rel="stylesheet" href="style.css">
     </head>
     <body class="fond-image">
 
@@ -117,5 +117,6 @@ if (isset($_POST['sinscrire'])) {
         </form>
         </div>
         </div>
+        <script src="script.js"></script>
     </body>
 </html>
