@@ -2,13 +2,14 @@
 <head>
     <meta charset="UTF-8">
     <title>La Confrérie</title>
-    <link rel="stylesheet" href="style.css">
+    <link id="css_mode" rel="stylesheet" href="style.css">
 </head>
 
 <body id="accueil">
 
 <header id="front">
     <h1>La Confrérie</h1>
+	 <button onclick="swap()" id="btn-mode" class="btn-mode">🌙</button>
     <a href="Connexion.php" class="connecterbouton">👤 Se Connecter</a>
 </header>
 
@@ -52,7 +53,7 @@
 			<div class="menuitem">
 				<div class="menutexte">
 					<h3>Burrata des Pouilles au caviar Oscietra</h3>
-					<p>Burrata artisanale, caviar Oscietra, tomates confites, huile d’olive extra vierge</p>
+					<p>Burrata artisanale, caviar Oscietra, tomates confites, huile d'olive extra vierge</p>
 				</div>
 					<span class="prix">45 €</span>
 			</div>
@@ -98,5 +99,6 @@
 			</div>
 	</div>			
 	</section>	
+	<script src="script.js"></script>
 </body>
 </html>
