@@ -45,7 +45,7 @@ if (isset($_POST['envoyer_avis'])) {
 <head>
     <meta charset="UTF-8">
     <title>Avis de votre commande</title>
-    <link rel="stylesheet" href="style.css">
+    <link id="css_mode" rel="stylesheet" href="style.css">
 </head>
 <body class="fond-image">
 <div class="page-centree">
@@ -92,5 +92,6 @@ if (isset($_POST['envoyer_avis'])) {
         <a href="profil.php">← Retour au profil</a>
     </fieldset>
 </div>
+<script src="script.js"></script>
 </body>
 </html>
