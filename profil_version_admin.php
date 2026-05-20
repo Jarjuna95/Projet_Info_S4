@@ -69,7 +69,7 @@ if (empty($mesCommandes)) {
 <head>
     <meta charset="UTF-8">
     <title>Profil - La Confrérie</title>
-    <link rel="stylesheet" href="style.css">
+    <link id="css_mode" rel="stylesheet" href="style.css">
 </head>
 <body id="accueil2">
     <h1 class="ptitre">────── Profil utilisateur ──────</h1>
@@ -107,5 +107,6 @@ if (empty($mesCommandes)) {
     <div>
         <a href="admin.php" class="boutton">Retour à l'administration</a>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>
