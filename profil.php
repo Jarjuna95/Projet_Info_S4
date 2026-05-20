@@ -4,6 +4,7 @@ require_once('./fonctionphp/fonctions.inc.php');
 session_start();
 redirecterSiNonConnecte('./Connexion.php');
 redirecterSiMauvaisRole('client', './Connexion.php');
+redirecterSiBloquer('./Connexion.php');
 
 $clientId     = $_SESSION[SESSION_ID];
 $utilisateurs = lireUtilisateurs();
