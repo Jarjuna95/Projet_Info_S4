@@ -1,3 +1,4 @@
+
 <?php
 require_once('./fonctionphp/constantes.inc.php');
 require_once('./fonctionphp/fonctions.inc.php');
@@ -22,9 +23,10 @@ if ($cmd === false || $cmd['client_id'] != $clientId || $cmd['statut'] !== 'livr
     header('Location: ./profil.php');
     exit(0);
 }
+
 // Quand le client clique sur "Envoyer", fetch() envoie une requête POST vers cette même page
 // On détecte cela avec isset($_POST['note_livraison'])
-// On traite la note et on renvoie une réponse JSON au lieu d'afficher du HTML
+// On traite la note et on renvoie une réponse JSON
 if (isset($_POST['note_livraison'])) {
 
     // Toutes les réponses de ce bloc sont au format JSON
@@ -70,7 +72,6 @@ if (isset($_POST['note_livraison'])) {
     echo json_encode(['message' => 'Merci pour votre avis ! Il a bien été enregistré.']);
     exit(0);
 }
-
 // Vérifie si la commande a déjà été notée (une seule notation autorisée par commande)
 $dejaNote = !empty($cmd['note_livraison']);
 ?>
@@ -79,7 +80,7 @@ $dejaNote = !empty($cmd['note_livraison']);
 <head>
     <meta charset="UTF-8">
     <title>Avis de votre commande</title>
-    <link rel="stylesheet" href="style.css">
+    <link id="css_mode" rel="stylesheet" href="style.css">
 </head>
 <body class="fond-image">
 <div class="page-centree">
@@ -132,7 +133,7 @@ $dejaNote = !empty($cmd['note_livraison']);
             <a href="profil.php">← Retour au profil</a>
 
             <script>
-                // Elle envoie les données du formulaire de façon asynchrone avec fetch()
+                //envoie les données du formulaire de façon asynchrone avec fetch()
                 async function envoyerAvis() {
 
                     // FormData collecte les valeurs du formulaire et les prépare pour l'envoi en POST
@@ -143,7 +144,7 @@ $dejaNote = !empty($cmd['note_livraison']);
                     donnees.append('commentaire',    document.getElementById('commentaire').value);
 
                     try {
-                        // Envoie une requête POST asynchrone vers cette même page (avis.php)
+                        // Envoie une requête POST asynchrone vers avis.php
                         // L'id de la commande est passé en paramètre GET dans l'URL
                         const reponse = await fetch('./avis.php?commande_id=<?php echo $commandeId; ?>', {
                             method : 'POST',
@@ -153,7 +154,7 @@ $dejaNote = !empty($cmd['note_livraison']);
                         // Lit la réponse JSON renvoyée par le serveur PHP
                         const resultat = await reponse.json();
 
-                        // Affiche le message de retour dans la zone #message
+                        // Affiche le message de retour dans la zone #message sans recharger la page
                         document.getElementById('message').textContent = resultat.message;
 
                         // Cache le formulaire pour ne plus pouvoir noter une deuxième fois
@@ -169,5 +170,6 @@ $dejaNote = !empty($cmd['note_livraison']);
 
     </fieldset>
 </div>
+<script src="script.js"></script>
 </body>
 </html>
