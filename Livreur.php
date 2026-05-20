@@ -128,6 +128,7 @@ foreach ($mesCommandes as $c) {
                         <p><strong>Total : <?php echo number_format($cmd['prix_total'], 2); ?> €</strong></p>
                     </div>
 
+                    <!-- json_encode() formate la chaîne PHP en valeur JS valide -->
                     <!-- htmlspecialchars() convertit les " en &quot; pour ne pas casser l'attribut onclick="..." -->
                     <div class="boutons-livraison">
                         <button type="button" onclick="marquerCommande(<?php echo $cmd['id']; ?>, 'livree', <?php echo htmlspecialchars(json_encode($nomClient)); ?>, <?php echo htmlspecialchars(json_encode($adresse)); ?>, '<?php echo number_format($cmd['prix_total'], 2); ?>')" id="btn-livraison-terminer">✅ Livraison terminée</button>
@@ -138,7 +139,6 @@ foreach ($mesCommandes as $c) {
         <?php endforeach; ?>
     <?php endif; ?>
 
-    <!-- Section toujours présente dans le DOM : cachée si aucune livraison terminée au chargement -->
     <div id="section-terminees" <?php if (empty($terminees)) echo 'style="display:none;"'; ?>>
         <h2 class="ptitre" style="font-size:30px;">📋 Livraisons terminées</h2>
         <div class="cadre-tableau-admin">
@@ -152,7 +152,6 @@ foreach ($mesCommandes as $c) {
                         <th>Statut</th>
                     </tr>
                 </thead>
-                <!-- id="tbody-terminees" : JS cible ce tbody pour y ajouter une ligne après chaque livraison -->
                 <tbody id="tbody-terminees">
                     <?php foreach ($terminees as $cmd): ?>
                         <?php
@@ -188,7 +187,7 @@ foreach ($mesCommandes as $c) {
 
     <script>
         // Reçoit l'id, l'action ('livree' ou 'abandonnee'), le nom du client, l'adresse et le prix
-        // Ces infos permettent d'ajouter la ligne dans le tableau sans recharger la page
+        // Ces infos permettent d'ajouter la ligne dans le tableau
         async function marquerCommande(commandeId, action, nomClient, adresse, prix) {
 
             // FormData prépare les données à envoyer en POST
@@ -198,7 +197,7 @@ foreach ($mesCommandes as $c) {
             donnees.append('action',      action);
 
             try {
-                // Envoie une requête POST asynchrone vers Livreur.php
+                // Envoie une requête POST vers Livreur.php
                 const reponse = await fetch('./Livreur.php', {
                     method : 'POST',
                     body   : donnees
@@ -213,7 +212,7 @@ foreach ($mesCommandes as $c) {
                 // Supprime la carte de cette commande du bloc "En cours de livraison"
                 document.getElementById('carte-' + commandeId).remove();
 
-                // Affiche la section "Livraisons terminées" si elle était cachée 
+                // Affiche la section "Livraisons terminées" si elle était cachée (display:none au départ)
                 document.getElementById('section-terminees').style.display = '';
 
                 // Choisit le badge de statut selon l'action effectuée
