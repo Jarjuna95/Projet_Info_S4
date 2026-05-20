@@ -51,7 +51,7 @@ foreach ($mesCommandes as $c) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Espace Livreur - La Confrérie</title>
-    <link rel="stylesheet" href="style.css">
+    <link id="css_mode" rel="stylesheet" href="style.css">
 </head>
 <body id="accueil2">
 
@@ -183,6 +183,6 @@ foreach ($mesCommandes as $c) {
     <div class="lien-deconnexion">
         <a href="deconnexion.php" class="boutton">🚪 Se déconnecter</a>
     </div>
-    
+    <script src="script.js"></script>
 </body>
 </html>
