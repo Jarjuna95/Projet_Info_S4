@@ -4,6 +4,7 @@ require_once('./fonctionphp/fonctions.inc.php');
 require_once('./fonctionphp/getapikey.php');
 session_start();
 redirecterSiNonConnecte('./Connexion.php');
+redirecterSiBloquer('./Connexion.php');
 
 if(!isset($_SESSION['panier']) || empty($_SESSION['panier'])){
     header('Location: panier.php');
