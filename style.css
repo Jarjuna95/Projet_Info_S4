@@ -59,9 +59,9 @@
 }
 
 .connecterbouton {
-    position: absolute;        /* on sort du flux flex pour le mettre à droite */
-    right: 50px;               /* distance par rapport au bord droit */
-    top: 50%;                  /* centre vertical */
+    position: absolute;       
+    right: 50px;               
+    top: 50%;                  
     transform: translateY(-50%); /* ajuste le centre exact vertical usage de chatgpt pour positioner correctement le bouton car il n'était pas aligné */
     background-color: linear-gradient(to bottom, rgb(184, 148, 58), rgb(192, 173, 125));
     color: white;
@@ -630,19 +630,51 @@ legend {
     margin: 10px 0 20px;
 }
 
-/*bouton clair/sombre */
-.btn-mode {
-    margin-left: 30px;
-    background: rgba(255,255,255,0.15);
-    border: 2px solid rgba(255,255,255,0.6);
-    border-radius: 50%;
-    width: 42px;
-    height: 42px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: 0.3s;
+
+.boutons-livraison {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-.btn-mode:hover {
-    background: rgba(255,255,255,0.3);
+.btn-abandon {
+    background-color: rgb(180, 80, 80);
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.statut-livree {
+    color: rgb(46, 125, 50);
+    font-weight: bold;
+}
+
+.statut-abandonnee {
+    color: #c0392b;
+    font-weight: bold;
+}
+
+.lien-deconnexion {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.texte-centre {
+    text-align: center;
+    color: rgb(127, 103, 6);
+    font-style: italic;
+}
+
+#message {
+    text-align: center;
+    font-weight: bold;
+    margin: 20px auto;
+    max-width: 600px;
 }
