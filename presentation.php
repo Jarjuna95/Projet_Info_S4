@@ -3,7 +3,8 @@ require_once('./fonctionphp/constantes.inc.php');
 require_once('./fonctionphp/fonctions.inc.php');
 session_start();
 redirecterSiNonConnecte('./Connexion.php');
- 
+redirecterSiBloquer('./Connexion.php');
+
 if (!isset($_SESSION['panier'])) {
     $_SESSION['panier'] = array();
 }
