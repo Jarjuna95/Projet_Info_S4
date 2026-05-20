@@ -127,7 +127,7 @@ $labelsStatut = [
 
         <div id="cadre-gris-instructions">
             <p class="titre-cadre">Articles commandés</p>
-            <<?php foreach ($cmd['plats'] as $ligne) {
+            <?php foreach ($cmd['plats'] as $ligne) {
                 $plat = chercherPlatParId($plats, $ligne['plat_id']);
                 if ($plat) { ?>
                     <p>x<?php echo $ligne['quantite']; ?> — <?php echo htmlspecialchars($plat['nom']); ?></p>
