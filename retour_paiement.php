@@ -81,7 +81,7 @@ if ($paiementValide && $statut === 'accepted' && isset($_SESSION['commande_en_at
 <head>
     <meta charset="UTF-8">
     <title>Retour paiement - La Confrerie</title>
-    <link rel="stylesheet" href="style.css">
+    <link id="css_mode" rel="stylesheet" href="style.css">
 </head>
 <body id="accueil2">
  
@@ -104,6 +104,6 @@ if ($paiementValide && $statut === 'accepted' && isset($_SESSION['commande_en_at
  
 </fieldset>
 </div>
- 
+<script src="script.js"></script>
 </body>
 </html>
