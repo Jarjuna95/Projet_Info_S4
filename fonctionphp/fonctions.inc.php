@@ -132,4 +132,16 @@ function commandesDuClient($commandes, $clientId) {
 function estNotable($cmd) {
     return $cmd['statut'] === 'livree' && empty($cmd['note_livraison']);
 }
+
+function redirecterSiBloquer($url) {
+    if (isset($_SESSION[SESSION_ID])) {
+        $utilisateurs = lireUtilisateurs();
+        $user = chercherUtilisateurParId($utilisateurs, $_SESSION[SESSION_ID]);
+        if ($user !== false && $user['statut'] === 'bloque') {
+            session_destroy();
+            header("Location: $url");
+            exit(0);
+        }
+    }
+}
 ?>
