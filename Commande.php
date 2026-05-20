@@ -51,7 +51,7 @@ foreach ($commandes as $cmd) {
 <head>
     <meta charset="UTF-8">
     <title>Commandes - La Confrérie</title>
-    <link rel="stylesheet" href="style.css">
+    <link id="css_mode" rel="stylesheet" href="style.css">
 </head>
 <body id="accueil2">
 
@@ -123,6 +123,6 @@ foreach ($commandes as $cmd) {
     <div class="lien-deconnexion">
         <a href="deconnexion.php" class="boutton">🚪 Se déconnecter</a>
     </div>
-
+<script src="script.js"></script>
 </body>
 </html>
