@@ -53,7 +53,7 @@ if (isset($_POST['se_connecter'])) {
 <head>
     <meta charset="UTF-8" />
     <title>Page de Connexion</title>
-    <link rel="stylesheet" href="style.css">
+    <link id="css_mode" rel="stylesheet" href="style.css">
 </head>
 
 <header id="frontmini">
@@ -90,6 +90,6 @@ if (isset($_POST['se_connecter'])) {
         </div>
  
     </div>
- 
+<script src="script.js"></script> 
 </body>
 </html>
