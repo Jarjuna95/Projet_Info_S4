@@ -6,6 +6,7 @@ session_start();
 redirecterSiNonConnecte('./Connexion.php');
 // Vérifie que l'utilisateur a le rôle 'client', sinon redirige
 redirecterSiMauvaisRole('client', './Connexion.php');
+redirecterSiBloquer('./Connexion.php');
 
 // Récupère l'identifiant du client depuis la session
 $clientId   = $_SESSION[SESSION_ID];
