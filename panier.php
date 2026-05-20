@@ -53,7 +53,7 @@ foreach ($_SESSION['panier'] as $pid => $qte) {
 <head>
     <meta charset="UTF-8">
     <title>Panier - La Confrerie</title>
-    <link rel="stylesheet" href="style.css">
+    <link id="css_mode" rel="stylesheet" href="style.css">
 </head>
 <body id="accueil2">
  
@@ -127,6 +127,6 @@ foreach ($_SESSION['panier'] as $pid => $qte) {
  
 </fieldset>
 </div>
- 
+<script src="script.js"></script>
 </body>
 </html>
