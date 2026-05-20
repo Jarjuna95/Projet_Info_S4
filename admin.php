@@ -12,7 +12,7 @@ $utilisateurs = lireUtilisateurs();
 <head>
     <meta charset="UTF-8">
     <title>Page Administrateur</title>
-    <link rel="stylesheet" href="style.css">
+    <link id="css_mode" rel="stylesheet" href="style.css">
 </head>
 <body id="accueil2">
     <section>
@@ -45,5 +45,6 @@ $utilisateurs = lireUtilisateurs();
     <div class="lien-deconnexion">
         <a href="deconnexion.php" class="boutton">🚪 Se déconnecter</a>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>
