@@ -1,4 +1,3 @@
-
 <?php
 require_once('./fonctionphp/constantes.inc.php');
 require_once('./fonctionphp/fonctions.inc.php');
@@ -23,10 +22,8 @@ if ($cmd === false || $cmd['client_id'] != $clientId || $cmd['statut'] !== 'livr
     header('Location: ./profil.php');
     exit(0);
 }
-
 // Quand le client clique sur "Envoyer", fetch() envoie une requête POST vers cette même page
 // On détecte cela avec isset($_POST['note_livraison'])
-// On traite la note et on renvoie une réponse JSON
 if (isset($_POST['note_livraison'])) {
 
     // Toutes les réponses de ce bloc sont au format JSON
@@ -72,6 +69,7 @@ if (isset($_POST['note_livraison'])) {
     echo json_encode(['message' => 'Merci pour votre avis ! Il a bien été enregistré.']);
     exit(0);
 }
+
 // Vérifie si la commande a déjà été notée (une seule notation autorisée par commande)
 $dejaNote = !empty($cmd['note_livraison']);
 ?>
@@ -100,7 +98,8 @@ $dejaNote = !empty($cmd['note_livraison']);
         <?php } else { ?>
             <!-- Zone d'affichage des messages renvoyés par la réponse JSON de fetch() -->
             <div id="message"></div>
-            <!-- La soumission est gérée par JavaScript via fetch(), pas par le navigateur -->
+        
+            <!-- La soumission est gérée par JavaScript via fetch()-->
             <form id="formAvis">
 
                 <div class="div1">Note de la livraison (1 à 5)</div>
@@ -133,7 +132,8 @@ $dejaNote = !empty($cmd['note_livraison']);
             <a href="profil.php">← Retour au profil</a>
 
             <script>
-                //envoie les données du formulaire de façon asynchrone avec fetch()
+                // Fonction appelée au clic sur le bouton
+                // Elle envoie les données du formulaire avec fetch()
                 async function envoyerAvis() {
 
                     // FormData collecte les valeurs du formulaire et les prépare pour l'envoi en POST
@@ -154,7 +154,7 @@ $dejaNote = !empty($cmd['note_livraison']);
                         // Lit la réponse JSON renvoyée par le serveur PHP
                         const resultat = await reponse.json();
 
-                        // Affiche le message de retour dans la zone #message sans recharger la page
+                        // Affiche le message de retour dans la zone #message 
                         document.getElementById('message').textContent = resultat.message;
 
                         // Cache le formulaire pour ne plus pouvoir noter une deuxième fois
