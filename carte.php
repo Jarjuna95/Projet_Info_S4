@@ -9,7 +9,7 @@ $plats = lirePlats();
 <head>
     <meta charset="UTF-8">
     <title>Nos Plats - La Confrerie</title>
-    <link rel="stylesheet" href="style.css">
+    <link id="css_mode" rel="stylesheet" href="style.css">
 </head>
 <body id="accueil2">
  
@@ -28,6 +28,6 @@ $plats = lirePlats();
     </div>
  
 </section>
- 
+ <script src="script.js"></script>
 </body>
 </html>
