@@ -43,7 +43,9 @@ if (empty($mesCommandes)) {
         if ($cmd['statut'] === 'livree' && empty($cmd['note_livraison'])) {
             $boutonNote = '<a href="avis.php?commande_id=' . $cmd['id'] . '" class="boutton"> Noter cette commande</a>';
         } elseif (!empty($cmd['note_livraison'])) {
-            $boutonNote = '<p> Note livraison : ' . $cmd['note_livraison'] . '/5 — Produits : ' . $cmd['note_produit'] . '</p>';
+            // Si un commentaire a été laissé, on l'ajoute après la note produit
+            $commentaire = !empty($cmd['avis_commentaire']) ? ' — ' . htmlspecialchars($cmd['avis_commentaire']) : '';
+            $boutonNote  = '<p>Note livraison : ' . $cmd['note_livraison'] . '/5 — Produits : ' . $cmd['note_produit'] . $commentaire . '</p>';
         }
 
         $idCmd      = $cmd['id'];
@@ -69,7 +71,7 @@ if (empty($mesCommandes)) {
 <head>
     <meta charset="UTF-8">
     <title>Profil - La Confrérie</title>
-    <link id="css_mode" rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body id="accueil2">
     <h1 class="ptitre">────── Votre Profil ──────</h1>
@@ -97,6 +99,5 @@ if (empty($mesCommandes)) {
     <div class="lien-deconnexion">
         <a href="deconnexion.php" class="boutton">🚪 Se déconnecter</a>
     </div>
-    <script src="script.js"></script>
 </body>
 </html>
