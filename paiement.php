@@ -95,7 +95,7 @@ $_SESSION['commande_en_attente']['avis_commentaire']          = '';
 <head>
     <meta charset="UTF-8">
     <title>Paiement - La Confrerie</title>
-    <link rel="stylesheet" href="style.css">
+    <link id="css_mode" rel="stylesheet" href="style.css">
 </head>
 <body id="accueil2">
  
@@ -151,6 +151,6 @@ $_SESSION['commande_en_attente']['avis_commentaire']          = '';
  
 </fieldset>
 </div>
- 
+ <script src="script.js"></script>
 </body>
 </html>
