@@ -71,7 +71,7 @@ if (empty($mesCommandes)) {
 <head>
     <meta charset="UTF-8">
     <title>Profil - La Confrérie</title>
-    <link rel="stylesheet" href="style.css">
+    <link id="css_mode" rel="stylesheet" href="style.css">
 </head>
 <body id="accueil2">
     <h1 class="ptitre">────── Votre Profil ──────</h1>
@@ -99,5 +99,6 @@ if (empty($mesCommandes)) {
     <div class="lien-deconnexion">
         <a href="deconnexion.php" class="boutton">🚪 Se déconnecter</a>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>
