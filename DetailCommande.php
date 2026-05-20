@@ -54,7 +54,7 @@ $labelsStatut = [
 <head>
     <meta charset="UTF-8">
     <title>Détail commande #<?php echo $commandeId; ?> - La Confrérie</title>
-    <link rel="stylesheet" href="style.css">
+    <link id="css_mode" rel="stylesheet" href="style.css">
 </head>
 <body id="accueil2">
 
@@ -187,7 +187,7 @@ $labelsStatut = [
     <div class="lien-deconnexion">
         <a href="Commande.php" class="boutton" style="max-width:250px;">← Retour aux commandes</a>
     </div>
-
+    <script src="script.js"></script>
 </body>
 </html>
 
