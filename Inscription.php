@@ -74,8 +74,7 @@ if (isset($_POST['sinscrire'])) {
 
         <div class="page-centree">
         <div id="conteneur">
-        <!-- onsubmit : jd valide tous les champs avant d'envoyer la requête http -->
-        <form name="inscription" method="post" action="#" onsubmit="return validerInscription()">
+*        <form name="inscription" method="post" action="#" onsubmit="return validerInscription()">
             <fieldset>
                 <legend>Inscription</legend>
 
@@ -109,11 +108,11 @@ if (isset($_POST['sinscrire'])) {
 
         <div class="div1">Mot de passe</div>
         <div class="div2" style="display:flex; align-items:center; gap:8px;">
-            <input type="password" id="mdp" name="mdp" class="champ" maxlength="13" onkeyup="compterMdp()" />
+            <input type="password" id="mdp" name="mdp" class="champ" maxlength="16" onkeyup="compterMdp()" />
             <button type="button" onclick="toggleMdp('mdp', 'oeil-ins')" id="oeil-ins" style="background:none; border:none; cursor:pointer; font-size:22px; padding:5px;">👁 Voir</button>
         </div>
         <div class="div2">
-            <span id="compteur-mdp" style="font-size:13px; color:gray;">13 caractères restants</span>
+            <span id="compteur-mdp" style="font-size:13px; color:gray;">16 caractères restants</span>
         </div><br />
 
         <div class="div1"></div>
@@ -132,7 +131,7 @@ if (isset($_POST['sinscrire'])) {
 
                 var erreur = '';
 
-                // Lecture des valeurs
+                // Lecture des valeurs 
                 var nom       = document.getElementById('nom').value;
                 var prenom    = document.getElementById('prenom').value;
                 var email     = document.getElementById('email').value;
@@ -157,9 +156,9 @@ if (isset($_POST['sinscrire'])) {
                     erreur += 'Le téléphone doit contenir exactement 10 chiffres.<br>';
                 }
 
-                // Mot de passe : entre 6 et 13 caractères
-                if (mdp.length < 6 || mdp.length > 13) {
-                    erreur += 'Le mot de passe doit contenir entre 6 et 13 caractères.<br>';
+                // Mot de passe : entre 6 et 16 caractères
+                if (mdp.length < 6 || mdp.length > 16) {
+                    erreur += 'Le mot de passe doit contenir entre 6 et 16 caractères.<br>';
                 }
 
                 // Affiche ou efface les erreurs 
@@ -172,16 +171,17 @@ if (isset($_POST['sinscrire'])) {
             // Met à jour le compteur de caractères à chaque frappe 
             function compterMdp() {
                 var longueur  = document.getElementById('mdp').value.length; // nb de caractères tapés
-                var restants  = 13 - longueur;                               // nb de caractères restants
+                var restants  = 16 - longueur;                               // nb de caractères restants
                 var compteur  = document.getElementById('compteur-mdp');
 
                 // Affiche le nombre de caractères restants 
                 compteur.textContent = restants + ' caractères restants';
 
+                // Change la couleur quand il reste plus bcp de caracteres
                 if (restants <= 3) {
-                    compteur.style.color = 'red';    // Proche de la limite la couleur sera rouge
+                    compteur.style.color = 'red';    // Proche de la limite : rouge
                 } else {
-                    compteur.style.color = 'gray';   
+                    compteur.style.color = 'gray';   // Normal : gris
                 }
             }
 
