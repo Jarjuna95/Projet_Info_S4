@@ -68,44 +68,52 @@ if (isset($_POST['sinscrire'])) {
     <head>
         <meta charset="UTF-8" />
         <title>Page d'inscription</title>
-        <link id="css_mode" rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="style.css">
     </head>
     <body class="fond-image">
 
         <div class="page-centree">
         <div id="conteneur">
-        <form name="inscription" method="post" action="#">
+        <!-- onsubmit : jd valide tous les champs avant d'envoyer la requête http -->
+        <form name="inscription" method="post" action="#" onsubmit="return validerInscription()">
             <fieldset>
                 <legend>Inscription</legend>
 
+                <!-- Zone d'affichage des erreurs de validation côté client -->
+                <div id="erreurs-inscription" class="message-erreur"></div>
+
         <div class="div1">Nom</div>
         <div class="div2">
-            <input type="text" name="nom" class="champ" />
+            <input type="text" id="nom" name="nom" class="champ" />
         </div><br />
 
         <div class="div1">Prénom</div>
         <div class="div2">
-            <input type="text" name="prenom" class="champ" />
+            <input type="text" id="prenom" name="prenom" class="champ" />
         </div><br />
 
         <div class="div1">Adresse</div>
         <div class="div2">
-            <input type="text" name="adresse" class="champ" />
+            <input type="text" id="adresse" name="adresse" class="champ" />
         </div><br />
 
         <div class="div1">Numéro de téléphone</div>
         <div class="div2">
-            <input type="tel" name="telephone" class="champ" />
+            <input type="tel" id="telephone" name="telephone" class="champ" />
         </div><br />
 
         <div class="div1">Email</div>
         <div class="div2">
-            <input type="email" name="email" class="champ" />
+            <input type="email" id="email" name="email" class="champ" />
         </div><br />
-        
+
         <div class="div1">Mot de passe</div>
+        <div class="div2" style="display:flex; align-items:center; gap:8px;">
+            <input type="password" id="mdp" name="mdp" class="champ" maxlength="13" onkeyup="compterMdp()" />
+            <button type="button" onclick="toggleMdp('mdp', 'oeil-ins')" id="oeil-ins" style="background:none; border:none; cursor:pointer; font-size:22px; padding:5px;">👁 Voir</button>
+        </div>
         <div class="div2">
-            <input type="password" name="mdp" class="champ" />
+            <span id="compteur-mdp" style="font-size:13px; color:gray;">13 caractères restants</span>
         </div><br />
 
         <div class="div1"></div>
@@ -117,6 +125,79 @@ if (isset($_POST['sinscrire'])) {
         </form>
         </div>
         </div>
+        <script>
+            // Vérifie tous les champs avant d'envoyer le formulaire
+            // Retourne false pour bloquer la requête HTTP si un champ est invalide
+            function validerInscription() {
+
+                var erreur = '';
+
+                // Lecture des valeurs
+                var nom       = document.getElementById('nom').value;
+                var prenom    = document.getElementById('prenom').value;
+                var email     = document.getElementById('email').value;
+                var telephone = document.getElementById('telephone').value;
+                var mdp       = document.getElementById('mdp').value;
+
+                if (nom.length === 0) {
+                    erreur += 'Le nom est obligatoire.<br>';
+                }
+
+                if (prenom.length === 0) {
+                    erreur += 'Le prénom est obligatoire.<br>';
+                }
+
+                // Email : doit contenir @ et un point 
+                if (email.indexOf('@') === -1 || email.indexOf('.') === -1) {
+                    erreur += 'Email invalide (doit contenir @ et .).<br>';
+                }
+
+                // Téléphone : 10 chiffres et pas de lettres 
+                if (telephone.length !== 10 || isNaN(telephone)) {
+                    erreur += 'Le téléphone doit contenir exactement 10 chiffres.<br>';
+                }
+
+                // Mot de passe : entre 6 et 13 caractères
+                if (mdp.length < 6 || mdp.length > 13) {
+                    erreur += 'Le mot de passe doit contenir entre 6 et 13 caractères.<br>';
+                }
+
+                // Affiche ou efface les erreurs 
+                document.getElementById('erreurs-inscription').innerHTML = erreur;
+
+                // return false bloque l'envoi, return true l'autorise 
+                return erreur === '';
+            }
+
+            // Met à jour le compteur de caractères à chaque frappe 
+            function compterMdp() {
+                var longueur  = document.getElementById('mdp').value.length; // nb de caractères tapés
+                var restants  = 13 - longueur;                               // nb de caractères restants
+                var compteur  = document.getElementById('compteur-mdp');
+
+                // Affiche le nombre de caractères restants 
+                compteur.textContent = restants + ' caractères restants';
+
+                if (restants <= 3) {
+                    compteur.style.color = 'red';    // Proche de la limite la couleur sera rouge
+                } else {
+                    compteur.style.color = 'gray';   
+                }
+            }
+
+            // Affiche ou cache le mot de passe 
+            function toggleMdp(inputId, btnId) {
+                var input = document.getElementById(inputId);
+                var btn   = document.getElementById(btnId);
+                if (input.type === 'password') {
+                    input.type      = 'text';       // Rend le texte visible
+                    btn.textContent = '👁 Cacher';
+                } else {
+                    input.type      = 'password';   // Cache le texte
+                    btn.textContent = '👁 Voir';
+                }
+            }
+        </script>
         <script src="script.js"></script>
     </body>
 </html>
