@@ -6,6 +6,7 @@ session_start();
 redirecterSiNonConnecte('./Connexion.php');
 // Vérifie que l'utilisateur a le rôle 'client', sinon redirige
 redirecterSiMauvaisRole('client', './Connexion.php');
+// Vérifie que le compte n'est pas bloqué : si oui, détruit la session sur-le-champ
 redirecterSiBloquer('./Connexion.php');
 
 // Récupère l'identifiant du client depuis la session
@@ -23,22 +24,20 @@ if ($cmd === false || $cmd['client_id'] != $clientId || $cmd['statut'] !== 'livr
     header('Location: ./profil.php');
     exit(0);
 }
-// Quand le client clique sur "Envoyer", fetch() envoie une requête POST vers cette même page
+
+// Quand le client clique sur "Envoyer", XHR envoie une requête POST vers cette même page
 // On détecte cela avec isset($_POST['note_livraison'])
+// On traite la note et on renvoie une réponse JSON 
 if (isset($_POST['note_livraison'])) {
 
-    // Toutes les réponses de ce bloc sont au format JSON
-    // car c'est ce que fetch() attend pour faire reponse.json()
     header('Content-Type: application/json');
 
-    // Récupération des données envoyées par fetch() via FormData
-    // FormData envoie les données en POST, PHP les lit avec $_POST
     $noteLivraison = (int)$_POST['note_livraison'];
     $noteProduit   = isset($_POST['note_produit']) ? $_POST['note_produit'] : '';
     $commentaire   = isset($_POST['commentaire'])  ? $_POST['commentaire']  : '';
 
+    // Validation de la note côté serveur : elle doit être entre 1 et 5
     if ($noteLivraison < 1 || $noteLivraison > 5) {
-        // http_response_code(400) indique à fetch() que la requête est incorrecte
         http_response_code(400);
         echo json_encode(['message' => 'La note doit être un entier entre 1 et 5.']);
         exit(0);
@@ -96,9 +95,9 @@ $dejaNote = !empty($cmd['note_livraison']);
             <a href="profil.php" class="boutton">← Retour au profil</a>
 
         <?php } else { ?>
-            <!-- Zone d'affichage des messages renvoyés par la réponse JSON de fetch() -->
+            <!-- Zone d'affichage des messages renvoyés par la réponse JSON de XHR -->
             <div id="message"></div>
-        
+
             <form id="formAvis">
 
                 <div class="div1">Note de la livraison (1 à 5)</div>
@@ -123,7 +122,6 @@ $dejaNote = !empty($cmd['note_livraison']);
 
                 <div class="div1"></div>
                 <div class="div2">
-                    <!-- Le clic déclenche la fonction JavaScript asynchrone envoyerAvis() -->
                     <button type="button" onclick="envoyerAvis()" class="boutton">Envoyer mon avis</button>
                 </div><br />
 
@@ -131,36 +129,41 @@ $dejaNote = !empty($cmd['note_livraison']);
             <a href="profil.php">← Retour au profil</a>
 
             <script>
-                // Fonction appelée au clic sur le bouton et elle envoie les données du formulaire avec fetch()
-                async function envoyerAvis() {
 
-                    // FormData collecte les valeurs du formulaire et les prépare pour l'envoi en POST puis PHP les récupèrera ensuite dans $_POST
-                    const donnees = new FormData();
-                    donnees.append('note_livraison', parseInt(document.getElementById('note_livraison').value));
-                    donnees.append('note_produit',   document.getElementById('note_produit').value);
-                    donnees.append('commentaire',    document.getElementById('commentaire').value);
+                function envoyerAvis() {
 
-                    try {
-                        // Envoie une requête POST asynchrone vers avis.php
-                        // L'id de la commande est passé en paramètre GET dans l'URL
-                        const reponse = await fetch('./avis.php?commande_id=<?php echo $commandeId; ?>', {
-                            method : 'POST',
-                            body   : donnees
-                        });
+                    var xhr = new XMLHttpRequest();
 
-                        // Lit la réponse JSON renvoyée par le serveur PHP
-                        const resultat = await reponse.json();
+                    // Lecture des valeurs du formulaire avec getElementById()
+                    var noteLivraison = parseInt(document.getElementById('note_livraison').value);
+                    var noteProduit   = document.getElementById('note_produit').value;
+                    var commentaire   = document.getElementById('commentaire').value;
 
-                        // Affiche le message de retour dans la zone #message 
-                        document.getElementById('message').textContent = resultat.message;
+                    // PHP les récupèrera dans $_POST['note_livraison'], $_POST['note_produit'], $_POST['commentaire']
+                    var donnees = 'note_livraison=' + noteLivraison + '&note_produit=' + noteProduit + '&commentaire=' + commentaire;
 
-                        // Cache le formulaire pour ne plus pouvoir noter une deuxième fois
-                        document.getElementById('formAvis').style.display = 'none';
+                    // Fonction appelée automatiquement à chaque changement d'état de la requête 
+                    xhr.onreadystatechange = function() {
+                        // readyState == 4 : la réponse est complète 
+                        // status == 200 : le serveur a répondu sans erreur
+                        if (this.readyState == 4 && this.status == 200) {
 
-                    } catch (erreur) {
-                        // Affiché si le serveur est inaccessible ou la réponse est invalide
-                        document.getElementById('message').textContent = "Erreur : " + erreur.message;
-                    }
+                            // Convertit la réponse JSON du serveur en objet JavaScript
+                            var resultat = JSON.parse(this.responseText);
+
+                            // Affiche le message de retour 
+                            document.getElementById('message').textContent = resultat.message;
+
+                            // Cache le formulaire pour ne plus pouvoir noter une deuxième fois
+                            document.getElementById('formAvis').style.display = 'none';
+                        }
+                    };
+
+                    xhr.open('POST', './avis.php?commande_id=<?php echo $commandeId; ?>', true);
+
+                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+                    xhr.send(donnees);
                 }
             </script>
         <?php } ?>
