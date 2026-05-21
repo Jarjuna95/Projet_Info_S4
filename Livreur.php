@@ -10,8 +10,6 @@ $commandes    = lireCommandes();
 $plats        = lirePlats();          
 $utilisateurs = lireUtilisateurs();   
 
-// Quand le livreur clique sur un bouton, fetch() envoie une requête POST vers cette même page grâce à isset($_POST['action'])
-// On traite le statut et on renvoie une réponse JSON au lieu d'afficher du HTML
 if (isset($_POST['action']) && isset($_POST['commande_id'])) {
     header('Content-Type: application/json');
 
@@ -65,7 +63,6 @@ foreach ($mesCommandes as $c) {
     <h1 class="ptitre">📦 Mes livraisons</h1>
     <p class="ptitre" style="font-size:20px;">Bonjour <?php echo htmlspecialchars($_SESSION['prenom'] . ' ' . $_SESSION['nom']); ?></p>
 
-    <!-- Zone d'affichage du message renvoyé par fetch() après action du livreur -->
     <div id="message"></div>
 
     <h2 class="ptitre" style="font-size:30px;">🚴 En cours de livraison</h2>
@@ -128,8 +125,6 @@ foreach ($mesCommandes as $c) {
                         <p><strong>Total : <?php echo number_format($cmd['prix_total'], 2); ?> €</strong></p>
                     </div>
 
-                    <!-- json_encode() formate la chaîne PHP en valeur JS valide -->
-                    <!-- htmlspecialchars() convertit les " en &quot; pour ne pas casser l'attribut onclick="..." -->
                     <div class="boutons-livraison">
                         <button type="button" onclick="marquerCommande(<?php echo $cmd['id']; ?>, 'livree', <?php echo htmlspecialchars(json_encode($nomClient)); ?>, <?php echo htmlspecialchars(json_encode($adresse)); ?>, '<?php echo number_format($cmd['prix_total'], 2); ?>')" id="btn-livraison-terminer">✅ Livraison terminée</button>
                         <button type="button" onclick="marquerCommande(<?php echo $cmd['id']; ?>, 'abandonnee', <?php echo htmlspecialchars(json_encode($nomClient)); ?>, <?php echo htmlspecialchars(json_encode($adresse)); ?>, '<?php echo number_format($cmd['prix_total'], 2); ?>')" class="btn-abandon">❌ Adresse introuvable</button>
@@ -152,6 +147,7 @@ foreach ($mesCommandes as $c) {
                         <th>Statut</th>
                     </tr>
                 </thead>
+
                 <tbody id="tbody-terminees">
                     <?php foreach ($terminees as $cmd): ?>
                         <?php
@@ -186,54 +182,51 @@ foreach ($mesCommandes as $c) {
     </div>
 
     <script>
-        // Reçoit l'id, l'action ('livree' ou 'abandonnee'), le nom du client, l'adresse et le prix
-        // Ces infos permettent d'ajouter la ligne dans le tableau
-        async function marquerCommande(commandeId, action, nomClient, adresse, prix) {
+        // Reçoit l'id, l'action ('livree' ou 'abandonnee'), le nom du client, l'adresse et le prix permettant d'ajouter la ligne dans le tableau 
+        function marquerCommande(commandeId, action, nomClient, adresse, prix) {
 
-            // FormData prépare les données à envoyer en POST
-            // PHP les lira dans $_POST['commande_id'] et $_POST['action']
-            const donnees = new FormData();
-            donnees.append('commande_id', commandeId);
-            donnees.append('action',      action);
+            var xhr = new XMLHttpRequest();
 
-            try {
-                // Envoie une requête POST vers Livreur.php
-                const reponse = await fetch('./Livreur.php', {
-                    method : 'POST',
-                    body   : donnees
-                });
+            var donnees = 'commande_id=' + commandeId + '&action=' + action;
 
-                // Lit la réponse JSON renvoyée par le serveur PHP
-                const resultat = await reponse.json();
+            xhr.onreadystatechange = function() {
+                // readyState == 4 : la réponse est complète 
+                // status == 200 : le serveur a répondu sans erreur 
+                if (this.readyState == 4 && this.status == 200) {
 
-                // Affiche le message de confirmation dans la zone #message
-                document.getElementById('message').textContent = resultat.message;
+                    var resultat = JSON.parse(this.responseText);
 
-                // Supprime la carte de cette commande du bloc "En cours de livraison"
-                document.getElementById('carte-' + commandeId).remove();
+                    document.getElementById('message').textContent = resultat.message;
 
-                // Affiche la section "Livraisons terminées" si elle était cachée (display:none au départ)
-                document.getElementById('section-terminees').style.display = '';
+                    // Supprime la carte de cette commande du bloc "En cours de livraison"
+                    document.getElementById('carte-' + commandeId).remove();
 
-                const statut = action === 'livree'
-                    ? '<span class="statut-livree">✅ Livrée</span>'
-                    : '<span class="statut-abandonnee">⚠️ Abandonnée</span>';
+                    // Affiche la section "Livraisons terminées" si elle était cachée 
+                    document.getElementById('section-terminees').style.display = '';
 
-                // Ajoute une nouvelle ligne dans le tableau des livraisons terminées
-                // innerHTML += ajoute le HTML de la ligne à la suite des lignes existantes
-                document.getElementById('tbody-terminees').innerHTML +=
-                    '<tr>' +
-                    '<td>#' + commandeId + '</td>' +
-                    '<td>' + nomClient   + '</td>' +
-                    '<td>' + adresse     + '</td>' +
-                    '<td>' + prix        + ' €</td>' +
-                    '<td>' + statut      + '</td>' +
-                    '</tr>';
+                    // Choisit le badge de statut selon l'action effectuée
+                    var statut = action === 'livree'
+                        ? '<span class="statut-livree">✅ Livrée</span>'
+                        : '<span class="statut-abandonnee">⚠️ Abandonnée</span>';
 
-            } catch (erreur) {
-                // Affiché si le serveur est inaccessible ou la réponse est invalide
-                document.getElementById('message').textContent = "Erreur : " + erreur.message;
-            }
+                    // Ajoute une nouvelle ligne dans le tableau des livraisons terminées
+                    // innerHTML += ajoute le HTML de la ligne à la suite des lignes existantes
+                    document.getElementById('tbody-terminees').innerHTML +=
+                        '<tr>' +
+                        '<td>#' + commandeId + '</td>' +
+                        '<td>' + nomClient   + '</td>' +
+                        '<td>' + adresse     + '</td>' +
+                        '<td>' + prix        + ' €</td>' +
+                        '<td>' + statut      + '</td>' +
+                        '</tr>';
+                }
+            };
+
+            xhr.open('POST', './Livreur.php', true);
+
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+            xhr.send(donnees);
         }
     </script>
     <script src="script.js"></script>
