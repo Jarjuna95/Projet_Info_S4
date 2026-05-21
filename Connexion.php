@@ -65,7 +65,6 @@ if (isset($_POST['se_connecter'])) {
     <div class="page-centree">
  
         <div id="conteneur">
-            <!-- onsubmit="return valider()" : si valider() retourne false, la requête HTTP n'est pas envoyée -->
             <form name="connexion" method="post" action="#" onsubmit="return validerConnexion()">
                 <fieldset>
                     <legend>Connexion</legend>
@@ -80,11 +79,11 @@ if (isset($_POST['se_connecter'])) {
 
                     <div class="div1">Mot de passe</div>
                     <div class="div2" style="display:flex; align-items:center; gap:8px;">
-                        <input type="password" id="mdp-co" name="mdp" class="champ" maxlength="13" onkeyup="compterMdpCo()" />
+                        <input type="password" id="mdp-co" name="mdp" class="champ" maxlength="16" onkeyup="compterMdpCo()" />
                         <button type="button" onclick="toggleMdp('mdp-co', 'oeil-co')" id="oeil-co" style="background:none; border:none; cursor:pointer; font-size:22px; padding:5px;">👁️</button>
                     </div>
                     <div class="div2">
-                        <span id="compteur-mdp-co" style="font-size:13px; color:gray;">13 caractères restants</span>
+                        <span id="compteur-mdp-co" style="font-size:13px; color:gray;">16 caractères restants</span>
                     </div><br />
 
                     <div class="div1"></div>
@@ -130,7 +129,7 @@ if (isset($_POST['se_connecter'])) {
         // Met à jour le compteur de caractères restants à chaque frappe
         function compterMdpCo() {
             var longueur = document.getElementById('mdp-co').value.length;
-            var restants = 13 - longueur;
+            var restants = 16 - longueur;
             var compteur = document.getElementById('compteur-mdp-co');
             compteur.textContent    = restants + ' caractères restants';
            
