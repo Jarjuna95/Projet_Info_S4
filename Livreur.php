@@ -215,7 +215,6 @@ foreach ($mesCommandes as $c) {
                 // Affiche la section "Livraisons terminées" si elle était cachée (display:none au départ)
                 document.getElementById('section-terminees').style.display = '';
 
-                // Choisit le badge de statut selon l'action effectuée
                 const statut = action === 'livree'
                     ? '<span class="statut-livree">✅ Livrée</span>'
                     : '<span class="statut-abandonnee">⚠️ Abandonnée</span>';
