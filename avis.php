@@ -37,7 +37,6 @@ if (isset($_POST['note_livraison'])) {
     $noteProduit   = isset($_POST['note_produit']) ? $_POST['note_produit'] : '';
     $commentaire   = isset($_POST['commentaire'])  ? $_POST['commentaire']  : '';
 
-    // Validation de la note côté serveur : elle doit être entre 1 et 5
     if ($noteLivraison < 1 || $noteLivraison > 5) {
         // http_response_code(400) indique à fetch() que la requête est incorrecte
         http_response_code(400);
@@ -100,7 +99,6 @@ $dejaNote = !empty($cmd['note_livraison']);
             <!-- Zone d'affichage des messages renvoyés par la réponse JSON de fetch() -->
             <div id="message"></div>
         
-            <!-- La soumission est gérée par JavaScript via fetch()-->
             <form id="formAvis">
 
                 <div class="div1">Note de la livraison (1 à 5)</div>
@@ -133,12 +131,10 @@ $dejaNote = !empty($cmd['note_livraison']);
             <a href="profil.php">← Retour au profil</a>
 
             <script>
-                // Fonction appelée au clic sur le bouton
-                // Elle envoie les données du formulaire avec fetch()
+                // Fonction appelée au clic sur le bouton et elle envoie les données du formulaire avec fetch()
                 async function envoyerAvis() {
 
-                    // FormData collecte les valeurs du formulaire et les prépare pour l'envoi en POST
-                    // PHP les récupèrera ensuite dans $_POST
+                    // FormData collecte les valeurs du formulaire et les prépare pour l'envoi en POST puis PHP les récupèrera ensuite dans $_POST
                     const donnees = new FormData();
                     donnees.append('note_livraison', parseInt(document.getElementById('note_livraison').value));
                     donnees.append('note_produit',   document.getElementById('note_produit').value);
