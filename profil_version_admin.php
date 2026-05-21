@@ -10,8 +10,6 @@ $utilisateurs = lireUtilisateurs();
 $commandes    = lireCommandes();
 $plats        = lirePlats();
 
-// Quand l'admin clique sur "Bloquer" ou "Débloquer", fetch() envoie une requête POST
-// On détecte cela avec isset($_POST['action_utilisateur'])
 if (isset($_POST['action_utilisateur']) && isset($_POST['user_id'])) {
     header('Content-Type: application/json');
 
@@ -126,7 +124,6 @@ if (empty($mesCommandes)) {
             <div class="ligneprofil"><p>Inscription :</p><span><?php echo htmlspecialchars($utilisateur['date_inscription']); ?></span></div>
             <div class="ligneprofil"><p>Points fidélité :</p><span><?php echo $utilisateur['points_fidelite']; ?> pts</span></div>
 
-            <!-- Zone d'affichage du message renvoyé par fetch() -->
             <div id="message"></div>
 
             <div class="admin_bouttons">
@@ -153,46 +150,42 @@ if (empty($mesCommandes)) {
 
     <script>
         // Fonction appelée au clic sur "Bloquer" ou "Débloquer"
-        // Envoie une requête POST asynchrone vers cette même page
-        async function gererUtilisateur(userId, action) {
+        function gererUtilisateur(userId, action) {
 
-            // FormData prépare les données à envoyer en POST
-            // PHP les lira dans $_POST['user_id'] et $_POST['action_utilisateur']
-            const donnees = new FormData();
-            donnees.append('user_id',           userId);
-            donnees.append('action_utilisateur', action);
+            var xhr = new XMLHttpRequest();
 
-            try {
-                // Envoie la requête POST asynchrone vers profil_version_admin.php
-                const reponse = await fetch('./profil_version_admin.php?id=<?php echo $clientId; ?>', {
-                    method : 'POST',
-                    body   : donnees
-                });
+            var donnees = 'user_id=' + userId + '&action_utilisateur=' + action;
 
-                // Lit la réponse JSON renvoyée par PHP
-                const resultat = await reponse.json();
+            xhr.onreadystatechange = function() {
+                // readyState == 4 : la réponse est complète 
+                // status == 200 : le serveur a répondu sans erreur 
+                if (this.readyState == 4 && this.status == 200) {
 
-                // Affiche le message de confirmation
-                document.getElementById('message').textContent = resultat.message;
+                    var resultat = JSON.parse(this.responseText);
 
-                // Met à jour l'affichage du statut sans recharger la page
-                document.getElementById('statut-affiche').textContent =
-                    resultat.statut === 'bloque' ? 'Bloque' : 'Actif';
+                    // Affiche le message de confirmation (ex: "Utilisateur bloqué.")
+                    document.getElementById('message').textContent = resultat.message;
 
-                // Met à jour le bouton selon le nouveau statut
-                const btn = document.querySelector('.admin_bouttons button');
-                if (resultat.statut === 'bloque') {
-                    btn.textContent = 'Débloquer le compte';
-                    btn.onclick = function() { gererUtilisateur(userId, 'debloquer'); };
-                } else {
-                    btn.textContent = 'Bloquer le compte';
-                    btn.onclick = function() { gererUtilisateur(userId, 'bloquer'); };
+                    document.getElementById('statut-affiche').textContent =
+                        resultat.statut === 'bloque' ? 'Bloque' : 'Actif';
+
+                    // Met à jour le bouton selon le nouveau statut
+                    var btn = document.querySelector('.admin_bouttons button');
+                    if (resultat.statut === 'bloque') {
+                        btn.textContent = 'Débloquer le compte';
+                        btn.onclick = function() { gererUtilisateur(userId, 'debloquer'); };
+                    } else {
+                        btn.textContent = 'Bloquer le compte';
+                        btn.onclick = function() { gererUtilisateur(userId, 'bloquer'); };
+                    }
                 }
+            };
 
-            } catch (erreur) {
-                // Affiché si le serveur est inaccessible ou la réponse est invalide
-                document.getElementById('message').textContent = "Erreur : " + erreur.message;
-            }
+            xhr.open('POST', './profil_version_admin.php?id=<?php echo $clientId; ?>', true);
+
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+            xhr.send(donnees);
         }
     </script>
     <script src="script.js"></script>
