@@ -19,7 +19,6 @@ if (isset($_POST['action']) && isset($_POST['commande_id'])) {
 
     // Vérifie que la commande existe et appartient bien à ce livreur
     if ($cmdVerif === false || $cmdVerif['livreur_id'] != $livreurId) {
-        http_response_code(403);
         echo json_encode(['message' => 'Accès refusé.']);
         exit(0);
     }
@@ -32,7 +31,6 @@ if (isset($_POST['action']) && isset($_POST['commande_id'])) {
         mettreAJourStatutCommande($cid, 'abandonnee');
         echo json_encode(['message' => "⚠️ Commande #$cid marquée comme abandonnée."]);
     } else {
-        http_response_code(400);
         echo json_encode(['message' => 'Action invalide.']);
     }
     exit(0);
@@ -205,9 +203,12 @@ foreach ($mesCommandes as $c) {
                     document.getElementById('section-terminees').style.display = '';
 
                     // Choisit le badge de statut selon l'action effectuée
-                    var statut = action === 'livree'
-                        ? '<span class="statut-livree">✅ Livrée</span>'
-                        : '<span class="statut-abandonnee">⚠️ Abandonnée</span>';
+                    var statut;
+                    if (action === 'livree') {
+                        statut = '<span class="statut-livree">✅ Livrée</span>';
+                    } else {
+                        statut = '<span class="statut-abandonnee">⚠️ Abandonnée</span>';
+                    }
 
                     // Ajoute une nouvelle ligne dans le tableau des livraisons terminées
                     // innerHTML += ajoute le HTML de la ligne à la suite des lignes existantes
