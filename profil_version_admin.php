@@ -34,12 +34,16 @@ if (isset($_POST['action_utilisateur']) && isset($_POST['user_id'])) {
     if ($modifie) {
         // Sauvegarde le tableau mis à jour dans le fichier JSON
         ecrireUtilisateurs($utilisateurs);
-        $nouveauStatut = ($action === 'bloquer') ? 'bloque' : 'actif';
-        $msg           = ($action === 'bloquer') ? 'Utilisateur bloqué.' : 'Utilisateur débloqué.';
+        if ($action === 'bloquer') {
+            $nouveauStatut = 'bloque';
+            $msg = 'Utilisateur bloqué.';
+        } else {
+            $nouveauStatut = 'actif';
+            $msg = 'Utilisateur débloqué.';
+        }
         // Renvoie le nouveau statut pour que JS mette à jour le bouton sans recharger
         echo json_encode(['message' => $msg, 'statut' => $nouveauStatut]);
     } else {
-        http_response_code(400);
         echo json_encode(['message' => 'Erreur : utilisateur introuvable.']);
     }
     exit(0);
@@ -129,9 +133,9 @@ if (empty($mesCommandes)) {
             <div class="admin_bouttons">
                 <!-- Le bouton change selon le statut actuel de l'utilisateur -->
                 <?php if ($utilisateur['statut'] === 'bloque'): ?>
-                    <button type="button" onclick="gererUtilisateur(<?php echo $utilisateur['id']; ?>, 'debloquer')" class="boutton">Débloquer le compte</button>
+                    <button type="button" id="btn-bloquer" onclick="gererUtilisateur(<?php echo $utilisateur['id']; ?>, 'debloquer')" class="boutton">Débloquer le compte</button>
                 <?php else: ?>
-                    <button type="button" onclick="gererUtilisateur(<?php echo $utilisateur['id']; ?>, 'bloquer')" class="boutton">Bloquer le compte</button>
+                    <button type="button" id="btn-bloquer" onclick="gererUtilisateur(<?php echo $utilisateur['id']; ?>, 'bloquer')" class="boutton">Bloquer le compte</button>
                 <?php endif; ?>
             </div>
         </section>
@@ -166,11 +170,15 @@ if (empty($mesCommandes)) {
                     // Affiche le message de confirmation (ex: "Utilisateur bloqué.")
                     document.getElementById('message').textContent = resultat.message;
 
-                    document.getElementById('statut-affiche').textContent =
-                        resultat.statut === 'bloque' ? 'Bloque' : 'Actif';
+                    // Met à jour le statut affiché selon la réponse du serveur
+                    if (resultat.statut === 'bloque') {
+                        document.getElementById('statut-affiche').textContent = 'Bloque';
+                    } else {
+                        document.getElementById('statut-affiche').textContent = 'Actif';
+                    }
 
-                    // Met à jour le bouton selon le nouveau statut
-                    var btn = document.querySelector('.admin_bouttons button');
+                    // Met à jour le bouton selon le nouveau statut (cours DOM : getElementById)
+                    var btn = document.getElementById('btn-bloquer');
                     if (resultat.statut === 'bloque') {
                         btn.textContent = 'Débloquer le compte';
                         btn.onclick = function() { gererUtilisateur(userId, 'debloquer'); };
