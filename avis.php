@@ -14,7 +14,11 @@ $clientId   = $_SESSION[SESSION_ID];
 // Charge toutes les commandes depuis le fichier JSON
 $commandes  = lireCommandes();
 // Récupère l'id de la commande passé en paramètre GET dans l'URL
-$commandeId = isset($_GET['commande_id']) ? (int)$_GET['commande_id'] : 0;
+if (isset($_GET['commande_id'])) {
+    $commandeId = (int)$_GET['commande_id'];
+} else {
+    $commandeId = 0;
+}
 // Recherche la commande correspondante dans le tableau
 $cmd        = chercherCommandeParId($commandes, $commandeId);
 
@@ -33,19 +37,25 @@ if (isset($_POST['note_livraison'])) {
     header('Content-Type: application/json');
 
     $noteLivraison = (int)$_POST['note_livraison'];
-    $noteProduit   = isset($_POST['note_produit']) ? $_POST['note_produit'] : '';
-    $commentaire   = isset($_POST['commentaire'])  ? $_POST['commentaire']  : '';
+    if (isset($_POST['note_produit'])) {
+        $noteProduit = $_POST['note_produit'];
+    } else {
+        $noteProduit = '';
+    }
+    if (isset($_POST['commentaire'])) {
+        $commentaire = $_POST['commentaire'];
+    } else {
+        $commentaire = '';
+    }
 
     // Validation de la note côté serveur : elle doit être entre 1 et 5
     if ($noteLivraison < 1 || $noteLivraison > 5) {
-        http_response_code(400);
         echo json_encode(['message' => 'La note doit être un entier entre 1 et 5.']);
         exit(0);
     }
 
     // Vérifie que la commande n'a pas déjà été notée (une seule note par commande)
     if (!empty($cmd['note_livraison'])) {
-        http_response_code(400);
         echo json_encode(['message' => 'Cette commande a déjà été notée.']);
         exit(0);
     }
