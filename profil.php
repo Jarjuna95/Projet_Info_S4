@@ -100,6 +100,33 @@ if (empty($mesCommandes)) {
     <div class="lien-deconnexion">
         <a href="deconnexion.php" class="boutton">🚪 Se déconnecter</a>
     </div>
+    <script>
+        var boutonCrayon = document.getElementById('crayon');
+        boutonCrayon.onclick = function() {
+
+        if (boutonCrayon.textContent === '✏️') {
+            var n = document.getElementById('champ_nom');
+            var p = document.getElementById('champ_prenom');
+            n.innerHTML = '<input type="text" id="input_nom" value="' + n.textContent + '">';
+            p.innerHTML = '<input type="text" id="input_prenom" value="' + p.textContent + '">';
+            boutonCrayon.textContent = '✅ Valider';
+
+        } else {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    document.getElementById('champ_nom').innerHTML    = document.getElementById('input_nom').value;
+                    document.getElementById('champ_prenom').innerHTML = document.getElementById('input_prenom').value;
+                    document.getElementById('message_profil').innerHTML = xhr.responseText;
+                    boutonCrayon.textContent = '✏️';
+                }
+            };
+            xhr.open("POST", "update_profil.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.send("nom=" + document.getElementById('input_nom').value + "&prenom=" + document.getElementById('input_prenom').value);
+        }
+        };
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
