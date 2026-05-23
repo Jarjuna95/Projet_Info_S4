@@ -83,8 +83,8 @@ if (empty($mesCommandes)) {
                 <h2 class="titre">Informations personnelles</h2>
                 <button id="crayon">✏️</button>
             </div>
-            <div class="ligneprofil"><p>Nom :</p><span><?php echo htmlspecialchars($client['nom']); ?></span></div>
-            <div class="ligneprofil"><p>Prénom :</p><span><?php echo htmlspecialchars($client['prenom']); ?></span></div>
+             <div class="ligneprofil"><p>Nom :</p><span id="champ_nom"><?php echo htmlspecialchars($client['nom']); ?></span></div>
+            <div class="ligneprofil"><p>Prénom :</p><span id="champ_prenom"><?php echo htmlspecialchars($client['prenom']); ?></span></div>
             <div class="ligneprofil"><p>Email :</p><span><?php echo htmlspecialchars($client['login']); ?></span></div>
             <div class="ligneprofil"><p>Points fidélité :</p><span><?php echo $client['points_fidelite']; ?> pts</span></div>
         </section>
