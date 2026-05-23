@@ -29,7 +29,7 @@ $plats = lirePlats();
     <title>Nos Plats - La Confrerie</title>
     <link id="css_mode" rel="stylesheet" href="style.css">
 </head>
-<body id="accueil2">
+<body id="accueil">
  
 <header id="front">
     <a href="page_accueil_connecte.php" class="panierbouton">Accueil</a>
@@ -40,9 +40,14 @@ $plats = lirePlats();
 </header>
  
 <section>
-    <h1 class="ptitre">────── Nos Produits ──────</h1>
- 
-    <div class="grille-produits">
+    <div class="filtres">
+    <button class="boutton" onclick="filtrer(this)" data-categorie="tous">Tous</button>
+    <button class="boutton" onclick="filtrer(this)" data-categorie="entree">Entrées</button>
+    <button class="boutton" onclick="filtrer(this)" data-categorie="plat">Plats</button>
+    <button class="boutton" onclick="filtrer(this)" data-categorie="dessert">Desserts</button>
+    <button class="boutton" onclick="filtrer(this)" data-categorie="boisson">Boissons</button>
+</div>
+    <div class="grille-produits" id="grille-produits">
         <?php foreach ($plats as $plat) { ?>
         <div class="carte-produit">
  
