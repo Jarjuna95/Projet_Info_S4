@@ -4,6 +4,7 @@ require_once('./fonctionphp/fonctions.inc.php');
 session_start();
 redirecterSiNonConnecte('./Connexion.php');
 redirecterSiMauvaisRole('client', './Connexion.php');
+redirecterSiBloquer('./Connexion.php');
 
 $clientId     = $_SESSION[SESSION_ID];
 $utilisateurs = lireUtilisateurs();
@@ -43,7 +44,9 @@ if (empty($mesCommandes)) {
         if ($cmd['statut'] === 'livree' && empty($cmd['note_livraison'])) {
             $boutonNote = '<a href="avis.php?commande_id=' . $cmd['id'] . '" class="boutton"> Noter cette commande</a>';
         } elseif (!empty($cmd['note_livraison'])) {
-            $boutonNote = '<p> Note livraison : ' . $cmd['note_livraison'] . '/5 — Produits : ' . $cmd['note_produit'] . '</p>';
+            // Si un commentaire a été laissé, on l'ajoute après la note produit
+            $commentaire = !empty($cmd['avis_commentaire']) ? ' — ' . htmlspecialchars($cmd['avis_commentaire']) : '';
+            $boutonNote  = '<p>Note livraison : ' . $cmd['note_livraison'] . '/5 — Produits : ' . $cmd['note_produit'] . $commentaire . '</p>';
         }
 
         $idCmd      = $cmd['id'];
@@ -80,8 +83,8 @@ if (empty($mesCommandes)) {
                 <h2 class="titre">Informations personnelles</h2>
                 <button id="crayon">✏️</button>
             </div>
-            <div class="ligneprofil"><p>Nom :</p><span id="champ_nom"><?php echo htmlspecialchars($client['nom']); ?></span></div>
-            <div class="ligneprofil"><p>Prénom :</p><span id="champ_prenom"><?php echo htmlspecialchars($client['prenom']); ?></span></div>
+            <div class="ligneprofil"><p>Nom :</p><span><?php echo htmlspecialchars($client['nom']); ?></span></div>
+            <div class="ligneprofil"><p>Prénom :</p><span><?php echo htmlspecialchars($client['prenom']); ?></span></div>
             <div class="ligneprofil"><p>Email :</p><span><?php echo htmlspecialchars($client['login']); ?></span></div>
             <div class="ligneprofil"><p>Points fidélité :</p><span><?php echo $client['points_fidelite']; ?> pts</span></div>
         </section>
@@ -97,33 +100,6 @@ if (empty($mesCommandes)) {
     <div class="lien-deconnexion">
         <a href="deconnexion.php" class="boutton">🚪 Se déconnecter</a>
     </div>
-    <script>
-        var boutonCrayon = document.getElementById('crayon');
-        boutonCrayon.onclick = function() {
-
-        if (boutonCrayon.textContent === '✏️') {
-            var n = document.getElementById('champ_nom');
-            var p = document.getElementById('champ_prenom');
-            n.innerHTML = '<input type="text" id="input_nom" value="' + n.textContent + '">';
-            p.innerHTML = '<input type="text" id="input_prenom" value="' + p.textContent + '">';
-            boutonCrayon.textContent = '✅ Valider';
-
-        } else {
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    document.getElementById('champ_nom').innerHTML    = document.getElementById('input_nom').value;
-                    document.getElementById('champ_prenom').innerHTML = document.getElementById('input_prenom').value;
-                    document.getElementById('message_profil').innerHTML = xhr.responseText;
-                    boutonCrayon.textContent = '✏️';
-                }
-            };
-            xhr.open("POST", "update_profil.php", true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.send("nom=" + document.getElementById('input_nom').value + "&prenom=" + document.getElementById('input_prenom').value);
-        }
-        };
-    </script>
     <script src="script.js"></script>
 </body>
 </html>
