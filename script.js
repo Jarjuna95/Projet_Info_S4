@@ -57,3 +57,38 @@ function enregistrerCommande(commandeId) {
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.send("commande_id=" + commandeId + "&nouveau_statut=" + statut + "&livreur_id=" + livreur);
 }
+
+// Ajoute ou enlève un plat
+function changerQte(platId, delta) {
+    quantites[platId] = quantites[platId] + delta;
+    if (quantites[platId] < 0) quantites[platId] = 0;
+    document.getElementById('qte_' + platId).textContent = quantites[platId];
+    recalculerTotal();
+}
+
+// Recalcule le total sans recharger la page
+function recalculerTotal() {
+    var total = 0;
+    for (var id in prix) {
+        total = total + (quantites[id] * prix[id]);
+    }
+    document.getElementById('total-affiche').textContent = total + ' €';
+}
+
+
+function sauvegarder(commandeId) {
+    var donnees = "commande_id=" + commandeId;
+    for (var id in quantites) {
+        donnees = donnees + "&qte_" + id + "=" + quantites[id];
+    }
+
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            document.getElementById('message-modification').innerHTML = xhr.responseText;
+        }
+    };
+    xhr.open("POST", "modifier_commande.php?commande_id=" + commandeId, true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send(donnees);
+}
