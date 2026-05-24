@@ -49,6 +49,11 @@ if (empty($mesCommandes)) {
             $boutonNote  = '<p>Note livraison : ' . $cmd['note_livraison'] . '/5 — Produits : ' . $cmd['note_produit'] . $commentaire . '</p>';
         }
 
+        $boutonModifier = "";
+        if ($cmd['statut'] === 'a_preparer') {
+            $boutonModifier = '<a href="modifier_commande.php?commande_id=' . $cmd['id'] . '" class="boutton">✏️ Modifier</a>';
+        }
+
         $idCmd      = $cmd['id'];
         $listePlats = implode(', ', $nomPlats);
         $prix       = number_format($cmd['prix_total'], 2);
@@ -63,6 +68,7 @@ if (empty($mesCommandes)) {
         <p>Le $date</p>
         <p style='color:$couleurStatut'><strong>$statut</strong></p>
         $boutonNote
+        $boutonModifier
         </div>";
     }
 }
